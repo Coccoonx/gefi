@@ -1,11 +1,15 @@
 package co.dwsoftware.erp.gefi.model;
 
+import lombok.Data;
+
 import javax.persistence.*;
 import java.util.Date;
 
 /**
  * Created by lyonnel on 03/09/16.
  */
+@Entity
+@Data
 public class Cotisation {
 
     @Id
@@ -16,11 +20,14 @@ public class Cotisation {
 
     private String type;
 
+    private String Annee;
+
     @Temporal(TemporalType.DATE)
     private Date dateDebut;
 
     @Temporal(TemporalType.DATE)
     private Date dateFin;
+
 
 
 }

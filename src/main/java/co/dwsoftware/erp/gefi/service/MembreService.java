@@ -7,7 +7,7 @@ import java.util.List;
 /**
  * Created by lyonnel on 02/09/16.
  */
-public interface MemberService {
+public interface MembreService {
 
     Membre create(Membre membre);
     Membre update(Membre membre);

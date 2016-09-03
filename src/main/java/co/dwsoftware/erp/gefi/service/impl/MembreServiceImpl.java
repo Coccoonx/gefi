@@ -2,7 +2,7 @@ package co.dwsoftware.erp.gefi.service.impl;
 
 import co.dwsoftware.erp.gefi.model.Membre;
 import co.dwsoftware.erp.gefi.repository.MembreRepository;
-import co.dwsoftware.erp.gefi.service.MemberService;
+import co.dwsoftware.erp.gefi.service.MembreService;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -11,7 +11,7 @@ import org.springframework.stereotype.Component;
  * Created by lyonnel on 02/09/16.
  */
 @Component
-public class MembreServiceImpl implements MemberService {
+public class MembreServiceImpl implements MembreService {
 
     @Autowired
     MembreRepository membreRepository;

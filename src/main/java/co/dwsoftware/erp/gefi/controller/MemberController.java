@@ -1,7 +1,7 @@
 package co.dwsoftware.erp.gefi.controller;
 
 import co.dwsoftware.erp.gefi.model.Membre;
-import co.dwsoftware.erp.gefi.service.MemberService;
+import co.dwsoftware.erp.gefi.service.MembreService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.transaction.annotation.Transactional;
@@ -16,27 +16,27 @@ import java.util.List;
 public class MemberController {
 
     @Autowired
-    MemberService memberService;
+    MembreService membreService;
 
     @RequestMapping(value = "/membre/", method = RequestMethod.POST)
     @ResponseBody
     @Transactional
     public Membre createMember(@RequestBody Membre membre) {
-        return memberService.create(membre);
+        return membreService.create(membre);
     }
 
     @RequestMapping(value = "/membre/", method = RequestMethod.PUT)
     @ResponseBody
     @Transactional
     public Membre updateMember(@RequestBody Membre membre) {
-        return memberService.update(membre);
+        return membreService.update(membre);
     }
 
     @RequestMapping(value = "/membre/", method = RequestMethod.GET)
     @ResponseBody
     @Transactional
     public List<Membre> findAll() {
-        return memberService.findAll();
+        return membreService.findAll();
     }
 
 
@@ -44,6 +44,6 @@ public class MemberController {
     @ResponseBody
     @Transactional
     public void deleteMember(@PathVariable long memberId) {
-        memberService.delete(memberId);
+        membreService.delete(memberId);
     }
 }
