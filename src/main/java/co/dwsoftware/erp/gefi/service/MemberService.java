@@ -1,6 +1,6 @@
 package co.dwsoftware.erp.gefi.service;
 
-import co.dwsoftware.erp.gefi.model.Member;
+import co.dwsoftware.erp.gefi.model.Membre;
 
 import java.util.List;
 
@@ -9,10 +9,13 @@ import java.util.List;
  */
 public interface MemberService {
 
-    Member create(Member member);
-    Member update(Member member);
-    Member findByLastName(String lastName);
-    List<Member> findAll();
+    Membre create(Membre membre);
+    Membre update(Membre membre);
+    Membre findByNom(String nom);
+    Membre findByPrenom(String nom);
+    Membre findByAdresse(String adresse);
+    Membre findByNumeroCni(String numeroCni);
+    List<Membre> findAll();
     void delete(Long Id);
 
 }
