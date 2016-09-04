@@ -1,5 +1,6 @@
 package co.dwsoftware.erp.gefi.service.impl;
 
+import co.dwsoftware.erp.gefi.model.Annee;
 import co.dwsoftware.erp.gefi.model.Cotisation;
 import co.dwsoftware.erp.gefi.model.Membre;
 import co.dwsoftware.erp.gefi.repository.CotisationRepository;
@@ -9,6 +10,8 @@ import co.dwsoftware.erp.gefi.service.MembreService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import javax.annotation.PostConstruct;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -63,5 +66,20 @@ public class CotisationServiceImpl implements CotisationService {
 
         }
         cotisationRepository.delete(id);
+    }
+
+    @PostConstruct
+    private void populateAnnee(){
+        Cotisation cotisation = new Cotisation();
+        cotisation.setNom("Tontine 2000");
+        cotisation.setDateDebut(new Date());
+        cotisation.setAnnee("2015");
+        cotisationRepository.save(cotisation);
+
+        cotisation = new Cotisation();
+        cotisation.setNom("Tontine 50000");
+        cotisation.setDateDebut(new Date());
+        cotisation.setAnnee("2016");
+        cotisationRepository.save(cotisation);
     }
 }

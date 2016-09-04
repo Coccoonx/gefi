@@ -1,11 +1,14 @@
 package co.dwsoftware.erp.gefi.service.impl;
 
 import co.dwsoftware.erp.gefi.model.Aide;
+import co.dwsoftware.erp.gefi.model.Annee;
 import co.dwsoftware.erp.gefi.repository.AideRepository;
 import co.dwsoftware.erp.gefi.service.AideService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import javax.annotation.PostConstruct;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -49,5 +52,18 @@ public class AideServiceImpl implements AideService {
 
         }
         aideRepository.delete(id);
+    }
+
+    @PostConstruct
+    private void populateAnnee(){
+        Aide aide = new Aide();
+        aide.setMotif("Decès");
+        aideRepository.save(aide);
+
+        aide = new Aide();
+        aide.setMotif("Naissance");
+        aideRepository.save(aide);
+
+        
     }
 }

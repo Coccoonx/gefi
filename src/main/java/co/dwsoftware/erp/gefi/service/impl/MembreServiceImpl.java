@@ -7,6 +7,8 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import javax.annotation.PostConstruct;
+
 /**
  * Created by lyonnel on 02/09/16.
  */
@@ -58,5 +60,24 @@ public class MembreServiceImpl implements MembreService {
     @Override
     public void delete(Long id) {
         membreRepository.delete(id);
+    }
+
+    @PostConstruct
+    public void populate(){
+        Membre membre = new Membre();
+        membre.setNom("Kamga");
+        membre.setPrenom("Maurice");
+        membre.setAdresse("Makepe");
+        membre.setNumeroCni("125548518");
+        membre.setTelephones("688778899");
+        membreRepository.save(membre);
+
+        membre = new Membre();
+        membre.setNom("Kemogne");
+        membre.setPrenom("Jean");
+        membre.setAdresse("Makepe");
+        membre.setNumeroCni("125548518");
+        membre.setTelephones("688778899");
+        membreRepository.save(membre);
     }
 }

@@ -6,6 +6,7 @@ import co.dwsoftware.erp.gefi.service.SanctionService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import javax.annotation.PostConstruct;
 import java.util.List;
 
 /**
@@ -50,5 +51,16 @@ public class SanctionServiceImpl implements SanctionService {
 
         }
         sanctionRepository.delete(id);
+    }
+
+    @PostConstruct
+    private void populate(){
+        Sanction sanction = new Sanction();
+        sanction.setMotif("Absence");
+        sanctionRepository.save(sanction);
+
+        sanction = new Sanction();
+        sanction.setMotif("Retard");
+        sanctionRepository.save(sanction);
     }
 }

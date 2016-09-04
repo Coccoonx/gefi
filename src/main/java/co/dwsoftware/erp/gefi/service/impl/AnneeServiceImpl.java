@@ -1,5 +1,6 @@
 package co.dwsoftware.erp.gefi.service.impl;
 
+import co.dwsoftware.erp.gefi.model.Aide;
 import co.dwsoftware.erp.gefi.model.Annee;
 import co.dwsoftware.erp.gefi.model.Cotisation;
 import co.dwsoftware.erp.gefi.repository.AnneeRepository;
@@ -9,6 +10,8 @@ import co.dwsoftware.erp.gefi.service.CotisationService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import javax.annotation.PostConstruct;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -52,5 +55,20 @@ public class AnneeServiceImpl implements AnneeService {
 
         }
         anneeRepository.delete(id);
+    }
+
+    @PostConstruct
+    private void populateAnnee(){
+        Annee annee = new Annee();
+        annee.setNom("2015");
+        annee.setDateDebut(new Date());
+        anneeRepository.save(annee);
+
+        annee = new Annee();
+        annee.setNom("2016");
+        annee.setDateDebut(new Date());
+        anneeRepository.save(annee);
+
+
     }
 }
