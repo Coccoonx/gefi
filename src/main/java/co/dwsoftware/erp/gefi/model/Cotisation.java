@@ -20,7 +20,7 @@ public class Cotisation {
 
     private String type;
 
-    private String Annee;
+    private String annee;
 
     @Temporal(TemporalType.DATE)
     private Date dateDebut;

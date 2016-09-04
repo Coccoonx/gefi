@@ -18,10 +18,10 @@
     </properties>
 
     <profiles>
-        <!--<profile>
+        <profile>
             <id>local</id>
             <activation>
-                <activeByDefault>false</activeByDefault>
+                <activeByDefault>true</activeByDefault>
             </activation>
             <properties>
                 <spring.datasource.driverClassName>org.h2.Driver</spring.datasource.driverClassName>
@@ -33,11 +33,11 @@
                 <spring.jpa.show-sql>true</spring.jpa.show-sql>
                 <spring.jpa.hibernate.ddl-auto>create-drop</spring.jpa.hibernate.ddl-auto>
             </properties>
-        </profile>-->
+        </profile>
         <profile>
             <id>dev</id>
             <activation>
-                <activeByDefault>true</activeByDefault>
+                <activeByDefault>false</activeByDefault>
             </activation>
             <properties>
                 <spring.datasource.driverClassName>org.postgresql.Driver</spring.datasource.driverClassName>

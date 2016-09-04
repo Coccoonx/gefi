@@ -13,7 +13,7 @@ import java.util.List;
  * Created by lyonnel on 02/09/16.
  */
 @Controller
-public class MemberController {
+public class MembreController {
 
     @Autowired
     MembreService membreService;
@@ -21,14 +21,14 @@ public class MemberController {
     @RequestMapping(value = "/membre/", method = RequestMethod.POST)
     @ResponseBody
     @Transactional
-    public Membre createMember(@RequestBody Membre membre) {
+    public Membre createMembre(@RequestBody Membre membre) {
         return membreService.create(membre);
     }
 
     @RequestMapping(value = "/membre/", method = RequestMethod.PUT)
     @ResponseBody
     @Transactional
-    public Membre updateMember(@RequestBody Membre membre) {
+    public Membre updateMembre(@RequestBody Membre membre) {
         return membreService.update(membre);
     }
 
@@ -43,7 +43,7 @@ public class MemberController {
     @RequestMapping(value = "/membre/{memberId}", method = RequestMethod.DELETE)
     @ResponseBody
     @Transactional
-    public void deleteMember(@PathVariable long memberId) {
+    public void deleteMembre(@PathVariable long memberId) {
         membreService.delete(memberId);
     }
 }

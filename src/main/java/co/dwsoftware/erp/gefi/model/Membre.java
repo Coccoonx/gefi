@@ -7,6 +7,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import java.util.List;
+import java.util.Set;
 
 @Entity
 @Data
@@ -19,6 +20,6 @@ public class Membre {
 	private String nom;
 	private String numeroCni;
 	private String photo;
-	private List<String> telephones;
+	private String telephones;
 	private String adresse;
 }
