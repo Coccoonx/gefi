@@ -20,6 +20,6 @@ public class Membre {
 	private String nom;
 	private String numeroCni;
 	private String photo;
-	private String telephones;
+	private String telephone;
 	private String adresse;
 }
