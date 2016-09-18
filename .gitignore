@@ -11,3 +11,6 @@ dependency-reduced-pom.xml
 buildNumber.properties
 .mvn/timing.properties
 *.iml
+build
+.idea
+build.gradle

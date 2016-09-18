@@ -52,8 +52,8 @@ public class MembreServiceImpl implements MembreService {
     }
 
     @Override
-    public Membre findByNumeroCni(String numeroCni) {
-        return membreRepository.findByAdresse(numeroCni);
+    public Membre findByCni(String numeroCni) {
+        return membreRepository.findByCni(numeroCni);
     }
 
     @Override
@@ -72,7 +72,7 @@ public class MembreServiceImpl implements MembreService {
         membre.setNom("Kamga");
         membre.setPrenom("Maurice");
         membre.setAdresse("Makepe");
-        membre.setNumeroCni("125548518");
+        membre.setCni("125548518");
         membre.setTelephone("688778899");
         membreRepository.save(membre);
 
@@ -80,7 +80,7 @@ public class MembreServiceImpl implements MembreService {
         membre.setNom("Kemogne");
         membre.setPrenom("Jean");
         membre.setAdresse("Makepe");
-        membre.setNumeroCni("125548518");
+        membre.setCni("125548518");
         membre.setTelephone("688778899");
         membreRepository.save(membre);
     }

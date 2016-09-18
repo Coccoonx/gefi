@@ -14,7 +14,7 @@ public interface MembreService {
     Membre findByNom(String nom);
     Membre findByPrenom(String nom);
     Membre findByAdresse(String adresse);
-    Membre findByNumeroCni(String numeroCni);
+    Membre findByCni(String numeroCni);
     List<Membre> findAll();
     void delete(Long Id);
 
