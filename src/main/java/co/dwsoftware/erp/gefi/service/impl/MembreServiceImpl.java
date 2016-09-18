@@ -3,11 +3,11 @@ package co.dwsoftware.erp.gefi.service.impl;
 import co.dwsoftware.erp.gefi.model.Membre;
 import co.dwsoftware.erp.gefi.repository.MembreRepository;
 import co.dwsoftware.erp.gefi.service.MembreService;
-import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import javax.annotation.PostConstruct;
+import java.util.List;
 
 /**
  * Created by lyonnel on 02/09/16.
@@ -20,13 +20,17 @@ public class MembreServiceImpl implements MembreService {
 
     @Override
     public Membre create(Membre membre) {
+        Membre exist = membreRepository.findOne(membre.getId());
+        if (exist != null) {
+            throw new IllegalArgumentException("");
+        }
         return membreRepository.save(membre);
     }
 
     @Override
     public Membre update(Membre membre) {
-        Membre exist = membreRepository.findByNom(membre.getNom());
-        if (exist != null) {
+        Membre exist = membreRepository.findOne(membre.getId());
+        if (exist == null) {
             throw new IllegalArgumentException("");
         }
         return membreRepository.save(membre);
@@ -69,7 +73,7 @@ public class MembreServiceImpl implements MembreService {
         membre.setPrenom("Maurice");
         membre.setAdresse("Makepe");
         membre.setNumeroCni("125548518");
-        membre.setTelephones("688778899");
+        membre.setTelephone("688778899");
         membreRepository.save(membre);
 
         membre = new Membre();
@@ -77,7 +81,7 @@ public class MembreServiceImpl implements MembreService {
         membre.setPrenom("Jean");
         membre.setAdresse("Makepe");
         membre.setNumeroCni("125548518");
-        membre.setTelephones("688778899");
+        membre.setTelephone("688778899");
         membreRepository.save(membre);
     }
 }
