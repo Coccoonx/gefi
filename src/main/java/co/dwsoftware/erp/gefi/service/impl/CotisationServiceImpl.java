@@ -71,13 +71,13 @@ public class CotisationServiceImpl implements CotisationService {
     @PostConstruct
     private void populateAnnee(){
         Cotisation cotisation = new Cotisation();
-        cotisation.setNom("Tontine 2000");
+        cotisation.setNom("Inscription 2000");
         cotisation.setDateDebut(new Date());
         cotisation.setAnnee("2015");
         cotisationRepository.save(cotisation);
 
         cotisation = new Cotisation();
-        cotisation.setNom("Tontine 50000");
+        cotisation.setNom("Inscription 50000");
         cotisation.setDateDebut(new Date());
         cotisation.setAnnee("2016");
         cotisationRepository.save(cotisation);

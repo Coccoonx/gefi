@@ -13,4 +13,3 @@ buildNumber.properties
 *.iml
 build
 .idea
-build.gradle
