@@ -18,7 +18,7 @@ public class Cotisation {
 
     private String nom;
 
-    private String type;
+    private Type type;
 
     private String annee;
 

@@ -5,6 +5,7 @@ import co.dwsoftware.erp.gefi.Application;
 import co.dwsoftware.erp.gefi.model.Cotisation;
 import co.dwsoftware.erp.gefi.model.InscriptionCotisation;
 import co.dwsoftware.erp.gefi.model.Membre;
+import co.dwsoftware.erp.gefi.model.Type;
 import co.dwsoftware.erp.gefi.service.CotisationService;
 import co.dwsoftware.erp.gefi.service.InscriptionCotisationService;
 import co.dwsoftware.erp.gefi.service.MembreService;
@@ -76,7 +77,7 @@ public class InscriptionCotisationControllerTest {
         cotisation.setAnnee("2016");
         cotisation.setDateDebut(new Date());
         cotisation.setNom("Cotisation de 2000");
-        cotisation.setType("mensuelle");
+        cotisation.setType(Type.TONTINE);
         cotisation = cotisationService.create(cotisation);
 
         InscriptionCotisation inscriptionCotisation = new InscriptionCotisation();
@@ -112,7 +113,7 @@ public class InscriptionCotisationControllerTest {
         cotisation.setAnnee("2016");
         cotisation.setDateDebut(new Date());
         cotisation.setNom("Cotisation de 2000");
-        cotisation.setType("mensuelle");
+        cotisation.setType(Type.TONTINE);
         cotisation = cotisationService.create(cotisation);
 
         InscriptionCotisation inscriptionCotisation = new InscriptionCotisation();

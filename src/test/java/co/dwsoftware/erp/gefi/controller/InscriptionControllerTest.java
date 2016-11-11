@@ -25,7 +25,6 @@ import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import org.springframework.web.context.WebApplicationContext;
 
 import javax.transaction.Transactional;
-import java.util.Date;
 
 import static com.jayway.restassured.module.mockmvc.RestAssuredMockMvc.given;
 
@@ -70,7 +69,7 @@ public class InscriptionControllerTest {
 
         Annee annee = new Annee();
         annee.setNom("2016");
-        annee.setDateDebut(new Date());
+        annee.setDateDebut("2016-10-25");
         annee = anneeService.create(annee);
 
         Inscription inscription = new Inscription();
