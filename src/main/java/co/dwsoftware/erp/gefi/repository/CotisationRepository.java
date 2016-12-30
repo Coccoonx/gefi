@@ -1,14 +1,22 @@
 package co.dwsoftware.erp.gefi.repository;
 
 import co.dwsoftware.erp.gefi.model.Cotisation;
-import co.dwsoftware.erp.gefi.model.Membre;
+import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.data.repository.query.Param;
+
+import java.util.List;
 
 public interface CotisationRepository extends CrudRepository<Cotisation, Long> {
 
     Cotisation findByNom(@Param("nom") String nom);
-    Cotisation findByType(@Param("type") String prenom);
+
+    @Query("SELECT c FROM Cotisation c where c.type = 0")
+    List<Cotisation> findByTontine();
+
+    @Query("SELECT c FROM Cotisation c where c.type = 1")
+    List<Cotisation> findByEpargne();
+
     Cotisation findByAnnee(@Param("annee") String annee);
 
 }

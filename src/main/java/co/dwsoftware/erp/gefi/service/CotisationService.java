@@ -12,7 +12,8 @@ public interface CotisationService {
     Cotisation create(Cotisation cotisation);
     Cotisation update(Cotisation cotisation);
     Cotisation findByNom(String nom);
-    Cotisation findByType(String type);
+    List<Cotisation> findByTontine();
+    List<Cotisation> findByEpargne();
     Cotisation findByAnnee(String annee);
     List<Cotisation> findAll();
     void delete(Long Id);

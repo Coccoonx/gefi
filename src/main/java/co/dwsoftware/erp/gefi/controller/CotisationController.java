@@ -9,9 +9,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
-/**
- * Created by lyonnel on 02/09/16.
- */
+
 @Controller
 public class CotisationController {
 
@@ -37,6 +35,21 @@ public class CotisationController {
     @Transactional
     public List<Cotisation> findAll() {
         return cotisationService.findAll();
+    }
+
+
+    @RequestMapping(value = "/cotisation/tontine", method = RequestMethod.GET)
+    @ResponseBody
+    @Transactional
+    public List<Cotisation> findAllByTontine() {
+        return cotisationService.findByTontine();
+    }
+
+    @RequestMapping(value = "/cotisation/epargne", method = RequestMethod.GET)
+    @ResponseBody
+    @Transactional
+    public List<Cotisation> findAllByEpargne() {
+        return cotisationService.findByEpargne();
     }
 
 
