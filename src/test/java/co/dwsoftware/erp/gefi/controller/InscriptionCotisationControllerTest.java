@@ -82,7 +82,6 @@ public class InscriptionCotisationControllerTest {
         InscriptionCotisation inscriptionCotisation = new InscriptionCotisation();
         inscriptionCotisation.setMembre(membre);
         inscriptionCotisation.setCotisation(cotisation);
-        inscriptionCotisation.setMontant(2000);
 
 
         given().
@@ -118,11 +117,9 @@ public class InscriptionCotisationControllerTest {
         InscriptionCotisation inscriptionCotisation = new InscriptionCotisation();
         inscriptionCotisation.setMembre(membre);
         inscriptionCotisation.setCotisation(cotisation);
-        inscriptionCotisation.setMontant(2000);
 
         inscriptionCotisation = inscriptionCotisationService.create(inscriptionCotisation);
 
-        inscriptionCotisation.setMontant(4000.0);
 
 
         given().

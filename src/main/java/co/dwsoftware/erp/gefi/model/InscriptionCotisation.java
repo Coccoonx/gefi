@@ -22,13 +22,14 @@ public class InscriptionCotisation {
     @Temporal(TemporalType.TIMESTAMP)
     private Date dateInscription = new Date();
 
-    private double montant;
+    private int numeroTirage;
 
     @ManyToOne
+    @NotNull
     private Membre membre;
 
     @ManyToOne
-//    @Nullable(value=false)
+    @NotNull
     private Cotisation cotisation;
 
 }

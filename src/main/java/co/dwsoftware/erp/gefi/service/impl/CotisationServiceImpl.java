@@ -87,14 +87,18 @@ public class CotisationServiceImpl implements CotisationService {
     private void populateAnnee() {
         Cotisation cotisation = new Cotisation();
         cotisation.setNom("Inscription 2000");
+        cotisation.setMontant(2000.0);
         cotisation.setDateDebut("2016-10-12");
+        cotisation.setDateFin("2017-10-11");
         cotisation.setType(Type.TONTINE);
         cotisation.setAnnee("2015");
         cotisationRepository.save(cotisation);
 
         cotisation = new Cotisation();
         cotisation.setNom("Inscription 50000");
+        cotisation.setMontant(50000.0);
         cotisation.setDateDebut("2016-10-13");
+        cotisation.setDateFin("2017-10-12");
         cotisation.setType(Type.TONTINE);
         cotisation.setAnnee("2016");
         cotisationRepository.save(cotisation);
@@ -102,6 +106,7 @@ public class CotisationServiceImpl implements CotisationService {
         cotisation = new Cotisation();
         cotisation.setNom("Epargne");
         cotisation.setDateDebut("2016-10-15");
+        cotisation.setDateFin("2017-10-14");
         cotisation.setType(Type.EPARGNE);
         cotisation.setAnnee("2016");
         cotisationRepository.save(cotisation);

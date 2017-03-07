@@ -21,6 +21,8 @@ public class Cotisation {
     @Enumerated(EnumType.ORDINAL)
     @Column(nullable = false)
     private Type type;
+    
+    private double montant;
 
     private String annee;
 
