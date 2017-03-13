@@ -3,11 +3,8 @@ package co.dwsoftware.erp.gefi.model;
 import lombok.Data;
 
 import javax.persistence.*;
-import java.util.Date;
 
-/**
- * Created by lyonnel on 03/09/16.
- */
+
 @Entity
 @Data
 public class Annee {
@@ -18,9 +15,7 @@ public class Annee {
 
     private String nom;
 
-    @Temporal(TemporalType.DATE)
-    private Date dateDebut;
+    private String dateDebut;
 
-    @Temporal(TemporalType.DATE)
-    private Date dateFin;
+    private String dateFin;
 }

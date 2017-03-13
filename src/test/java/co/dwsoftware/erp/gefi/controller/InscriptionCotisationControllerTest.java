@@ -2,10 +2,12 @@ package co.dwsoftware.erp.gefi.controller;
 
 
 import co.dwsoftware.erp.gefi.Application;
-import co.dwsoftware.erp.gefi.model.Annee;
-import co.dwsoftware.erp.gefi.model.Inscription;
+import co.dwsoftware.erp.gefi.model.Cotisation;
+import co.dwsoftware.erp.gefi.model.InscriptionCotisation;
 import co.dwsoftware.erp.gefi.model.Membre;
-import co.dwsoftware.erp.gefi.service.AnneeService;
+import co.dwsoftware.erp.gefi.model.Type;
+import co.dwsoftware.erp.gefi.service.CotisationService;
+import co.dwsoftware.erp.gefi.service.InscriptionCotisationService;
 import co.dwsoftware.erp.gefi.service.MembreService;
 import com.jayway.restassured.RestAssured;
 import com.jayway.restassured.http.ContentType;
@@ -32,14 +34,17 @@ import static com.jayway.restassured.module.mockmvc.RestAssuredMockMvc.given;
 @SpringApplicationConfiguration(classes = Application.class)   // 2
 @WebAppConfiguration   // 3
 @IntegrationTest("server.port:8081")   // 4
-public class InscriptionControllerTest {
+public class InscriptionCotisationControllerTest {
 
 
     @Autowired
     MembreService membreService;
 
     @Autowired
-    AnneeService anneeService;
+    CotisationService cotisationService;
+
+    @Autowired
+    InscriptionCotisationService inscriptionCotisationService;
 
     @Value("${server.port}")   // 6
             int port;
@@ -67,56 +72,68 @@ public class InscriptionControllerTest {
         membre.setTelephone("688778899");
         membre = membreService.create(membre);
 
-        Annee annee = new Annee();
-        annee.setNom("2016");
-        annee.setDateDebut("2016-10-25");
-        annee = anneeService.create(annee);
+        Cotisation cotisation = new Cotisation();
+        cotisation.setAnnee("2016");
+        cotisation.setDateDebut("2016-10-12");
+        cotisation.setNom("Cotisation de 2000");
+        cotisation.setType(Type.TONTINE);
+        cotisation = cotisationService.create(cotisation);
 
-        Inscription inscription = new Inscription();
-        inscription.setInscrit(membre);
-        inscription.setAnnee(annee);
-        inscription.setMontant(2000.0);
+        InscriptionCotisation inscriptionCotisation = new InscriptionCotisation();
+        inscriptionCotisation.setMembre(membre);
+        inscriptionCotisation.setCotisation(cotisation);
 
 
         given().
-                body(inscription).
+                body(inscriptionCotisation).
                 contentType(ContentType.JSON).
                 mockMvc(mockMvc).
                 when().
-                post("/inscription/").
+                post("/inscription/cotisation/").
                 then().
                 statusCode(HttpStatus.SC_OK).
-                content("annee.nom", Matchers.containsString("2016"));
+                content("cotisation.annee", Matchers.containsString("2016"));
+    }
+
+
+    @Test
+    @Transactional
+    public void update() {
+        Membre membre = new Membre();
+        membre.setNom("Kamga");
+        membre.setPrenom("Maurice");
+        membre.setAdresse("Makepe");
+        membre.setCni("125548518");
+        membre.setTelephone("688778899");
+        membre = membreService.create(membre);
+
+        Cotisation cotisation = new Cotisation();
+        cotisation.setAnnee("2016");
+        cotisation.setDateDebut("2016-10-16");
+        cotisation.setNom("Cotisation de 2000");
+        cotisation.setType(Type.TONTINE);
+        cotisation = cotisationService.create(cotisation);
+
+        InscriptionCotisation inscriptionCotisation = new InscriptionCotisation();
+        inscriptionCotisation.setMembre(membre);
+        inscriptionCotisation.setCotisation(cotisation);
+
+        inscriptionCotisation = inscriptionCotisationService.create(inscriptionCotisation);
+
+
+
+        given().
+                body(inscriptionCotisation).
+                contentType(ContentType.JSON).
+                mockMvc(mockMvc).
+                when().
+                put("/inscription/cotisation/").
+                then().
+                statusCode(HttpStatus.SC_OK).
+                content("montant", Matchers.equalTo(4000.0));
     }
 
 /*
-    @Test
-    @Transactional
-    public void getStudent() {
-        Student student = new Student();
-        student.setFirstName("Jacques");
-        student.setLastName("Ze");
-        student.setPassword("foo");
-        student.setEmail("myemail@test.com");
-        student.setUserName("JZ");
-
-        student = studentRepository.save(student);
-
-        User principal = new User(student.getId().toString(), "foo", true, true, true, true,
-                AuthorityUtils.createAuthorityList("USER"));
-        given().
-                mockMvc(mockMvc).
-                auth().principalWithCredentials(principal, "foo").
-                when().
-                get("/student").
-
-                then().
-                contentType(ContentType.JSON).
-                statusCode(HttpStatus.SC_OK).
-                body("userName", Matchers.containsString("JZ"));
-    }
-
-
     @Test
     @Transactional
     public void updateStudent() {

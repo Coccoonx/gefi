@@ -3,7 +3,6 @@ package co.dwsoftware.erp.gefi.model;
 import lombok.Data;
 
 import javax.persistence.*;
-import java.util.Date;
 
 /**
  * Created by lyonnel on 03/09/16.
@@ -16,17 +15,20 @@ public class Cotisation {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private long id;
 
+    @Column(nullable = false)
     private String nom;
 
-    private String type;
+    @Enumerated(EnumType.ORDINAL)
+    @Column(nullable = false)
+    private Type type;
+    
+    private double montant;
 
     private String annee;
 
-    @Temporal(TemporalType.DATE)
-    private Date dateDebut;
+    private String dateDebut;
 
-    @Temporal(TemporalType.DATE)
-    private Date dateFin;
+    private String dateFin;
 
 
 

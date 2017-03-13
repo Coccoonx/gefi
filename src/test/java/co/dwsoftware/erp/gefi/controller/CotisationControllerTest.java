@@ -2,13 +2,10 @@ package co.dwsoftware.erp.gefi.controller;
 
 
 import co.dwsoftware.erp.gefi.Application;
-import co.dwsoftware.erp.gefi.model.Annee;
-import co.dwsoftware.erp.gefi.model.Inscription;
-import co.dwsoftware.erp.gefi.model.Membre;
+import co.dwsoftware.erp.gefi.model.Type;
 import co.dwsoftware.erp.gefi.service.AnneeService;
 import co.dwsoftware.erp.gefi.service.MembreService;
 import com.jayway.restassured.RestAssured;
-import com.jayway.restassured.http.ContentType;
 import org.apache.http.HttpStatus;
 import org.hamcrest.Matchers;
 import org.junit.Before;
@@ -32,7 +29,7 @@ import static com.jayway.restassured.module.mockmvc.RestAssuredMockMvc.given;
 @SpringApplicationConfiguration(classes = Application.class)   // 2
 @WebAppConfiguration   // 3
 @IntegrationTest("server.port:8081")   // 4
-public class InscriptionControllerTest {
+public class CotisationControllerTest {
 
 
     @Autowired
@@ -58,35 +55,35 @@ public class InscriptionControllerTest {
 
     @Test
     @Transactional
-    public void createInscription() {
-        Membre membre = new Membre();
-        membre.setNom("Kamga");
-        membre.setPrenom("Maurice");
-        membre.setAdresse("Makepe");
-        membre.setCni("125548518");
-        membre.setTelephone("688778899");
-        membre = membreService.create(membre);
-
-        Annee annee = new Annee();
-        annee.setNom("2016");
-        annee.setDateDebut("2016-10-25");
-        annee = anneeService.create(annee);
-
-        Inscription inscription = new Inscription();
-        inscription.setInscrit(membre);
-        inscription.setAnnee(annee);
-        inscription.setMontant(2000.0);
+    public void findAllByType() {
+//        Membre membre = new Membre();
+//        membre.setNom("Kamga");
+//        membre.setPrenom("Maurice");
+//        membre.setAdresse("Makepe");
+//        membre.setCni("125548518");
+//        membre.setTelephone("688778899");
+//        membre = membreService.create(membre);
+//
+//        Annee annee = new Annee();
+//        annee.setNom("2016");
+//        annee.setDateDebut("2016-10-25");
+//        annee = anneeService.create(annee);
+//
+//        Inscription inscription = new Inscription();
+//        inscription.setInscrit(membre);
+//        inscription.setAnnee(annee);
+//        inscription.setMontant(2000.0);
 
 
         given().
-                body(inscription).
-                contentType(ContentType.JSON).
+//                body(inscription).
+//                contentType(ContentType.JSON).
                 mockMvc(mockMvc).
                 when().
-                post("/inscription/").
+                get("/cotisation/"+ Type.TONTINE).
                 then().
                 statusCode(HttpStatus.SC_OK).
-                content("annee.nom", Matchers.containsString("2016"));
+                body("annee.nom", Matchers.containsString("2016"));
     }
 
 /*

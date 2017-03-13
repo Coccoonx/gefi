@@ -1,6 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <projectDescription>
+<<<<<<< HEAD
 	<name>gefi</name>
+=======
+	<name>gs-accessing-data-rest</name>
+>>>>>>> 0f47461a1423c98df7283191bafca60bcc3cd3d9
 	<comment></comment>
 	<projects>
 	</projects>
@@ -15,8 +19,19 @@
 			<arguments>
 			</arguments>
 		</buildCommand>
+<<<<<<< HEAD
 	</buildSpec>
 	<natures>
+=======
+		<buildCommand>
+			<name>org.springframework.ide.eclipse.core.springbuilder</name>
+			<arguments>
+			</arguments>
+		</buildCommand>
+	</buildSpec>
+	<natures>
+		<nature>org.springframework.ide.eclipse.core.springnature</nature>
+>>>>>>> 0f47461a1423c98df7283191bafca60bcc3cd3d9
 		<nature>org.eclipse.jdt.core.javanature</nature>
 		<nature>org.eclipse.m2e.core.maven2Nature</nature>
 	</natures>
