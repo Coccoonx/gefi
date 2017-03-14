@@ -56,9 +56,19 @@ public class CotisationServiceImpl implements CotisationService {
     @Override
     public List<Cotisation> findByEpargne() {
 
-        logger.info("get all tontine");
+        logger.info("get all epargne");
 
         return cotisationRepository.findByEpargne();
+
+
+    }
+    
+    @Override
+    public List<Cotisation> findByAnnee() {
+
+        logger.info("get all annee");
+
+        return cotisationRepository.findByAnnee();
 
 
     }

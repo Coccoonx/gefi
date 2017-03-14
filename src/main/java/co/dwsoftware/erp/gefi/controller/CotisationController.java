@@ -51,6 +51,13 @@ public class CotisationController {
     public List<Cotisation> findAllByEpargne() {
         return cotisationService.findByEpargne();
     }
+    
+    @RequestMapping(value = "/cotisation/annee", method = RequestMethod.GET)
+    @ResponseBody
+    @Transactional
+    public List<Cotisation> findAllByAnnee() {
+        return cotisationService.findByAnnee();
+    }
 
 
     @RequestMapping(value = "/cotisation/{cotisationId}", method = RequestMethod.DELETE)
