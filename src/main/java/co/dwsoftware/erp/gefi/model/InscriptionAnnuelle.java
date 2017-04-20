@@ -13,13 +13,12 @@ import java.util.Date;
 
 @Entity
 @Data
-public class Inscription {
+public class InscriptionAnnuelle {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private long id;
 
-    private String nom;
 
     @CreatedDate
     @NotNull
@@ -31,14 +30,14 @@ public class Inscription {
     @Temporal(TemporalType.TIMESTAMP)
     private Date dateDerniereModification = new Date();
 
-
     private double montant;
 
     @ManyToOne
-    private Membre inscrit;
+    @NotNull
+    private Membre membre;
 
     @ManyToOne
-//    @Nullable(value=false)
-    private Annee annee;
+    @NotNull
+    private Cotisation cotisation;
 
 }

@@ -1,10 +1,13 @@
 package co.dwsoftware.erp.gefi.model;
 
 import lombok.Data;
+
 import org.springframework.data.annotation.CreatedDate;
+import org.springframework.data.annotation.LastModifiedDate;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
+
 import java.util.Date;
 
 
@@ -21,6 +24,11 @@ public class InscriptionCotisation {
     @NotNull
     @Temporal(TemporalType.TIMESTAMP)
     private Date dateInscription = new Date();
+    
+    @LastModifiedDate
+    @NotNull
+    @Temporal(TemporalType.TIMESTAMP)
+    private Date dateDerniereModification = new Date();
 
     private int numeroTirage;
 

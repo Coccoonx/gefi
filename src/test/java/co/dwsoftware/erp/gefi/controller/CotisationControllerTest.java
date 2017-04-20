@@ -2,7 +2,7 @@ package co.dwsoftware.erp.gefi.controller;
 
 
 import co.dwsoftware.erp.gefi.Application;
-import co.dwsoftware.erp.gefi.model.Type;
+import co.dwsoftware.erp.gefi.model.TypeCotisation;
 import co.dwsoftware.erp.gefi.service.AnneeService;
 import co.dwsoftware.erp.gefi.service.MembreService;
 import com.jayway.restassured.RestAssured;
@@ -80,7 +80,7 @@ public class CotisationControllerTest {
 //                contentType(ContentType.JSON).
                 mockMvc(mockMvc).
                 when().
-                get("/cotisation/"+ Type.TONTINE).
+                get("/cotisation/"+ TypeCotisation.TONTINE).
                 then().
                 statusCode(HttpStatus.SC_OK).
                 body("annee.nom", Matchers.containsString("2016"));
