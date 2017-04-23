@@ -3,14 +3,19 @@ package co.dwsoftware.erp.gefi.controller;
 
 import co.dwsoftware.erp.gefi.Application;
 import co.dwsoftware.erp.gefi.model.Cotisation;
-import co.dwsoftware.erp.gefi.model.InscriptionCotisation;
+import co.dwsoftware.erp.gefi.model.Transaction;
 import co.dwsoftware.erp.gefi.model.Membre;
 import co.dwsoftware.erp.gefi.model.TypeCotisation;
+import co.dwsoftware.erp.gefi.model.TypeTransaction;
 import co.dwsoftware.erp.gefi.service.CotisationService;
-import co.dwsoftware.erp.gefi.service.InscriptionCotisationService;
+import co.dwsoftware.erp.gefi.service.TransactionService;
 import co.dwsoftware.erp.gefi.service.MembreService;
+
 import com.jayway.restassured.RestAssured;
 import com.jayway.restassured.http.ContentType;
+import com.jayway.restassured.module.mockmvc.specification.MockMvcRequestSpecification;
+import com.jayway.restassured.response.ResponseOptions;
+
 import org.apache.http.HttpStatus;
 import org.hamcrest.Matchers;
 import org.junit.Before;
@@ -34,7 +39,7 @@ import static com.jayway.restassured.module.mockmvc.RestAssuredMockMvc.given;
 @SpringApplicationConfiguration(classes = Application.class)   // 2
 @WebAppConfiguration   // 3
 @IntegrationTest("server.port:8081")   // 4
-public class InscriptionCotisationControllerTest {
+public class TransactionControllerTest {
 
 
     @Autowired
@@ -44,7 +49,7 @@ public class InscriptionCotisationControllerTest {
     CotisationService cotisationService;
 
     @Autowired
-    InscriptionCotisationService inscriptionCotisationService;
+    TransactionService TransactionService;
 
     @Value("${server.port}")   // 6
             int port;
@@ -63,7 +68,7 @@ public class InscriptionCotisationControllerTest {
 
     @Test
     @Transactional
-    public void createInscription() {
+    public void createTransaction() {
         Membre membre = new Membre();
         membre.setNom("Kamga");
         membre.setPrenom("Maurice");
@@ -79,23 +84,27 @@ public class InscriptionCotisationControllerTest {
         cotisation.setType(TypeCotisation.TONTINE);
         cotisation = cotisationService.create(cotisation);
 
-        InscriptionCotisation inscriptionCotisation = new InscriptionCotisation();
-        inscriptionCotisation.setMembre(membre);
-        inscriptionCotisation.setCotisation(cotisation);
-
+        Transaction transaction = new Transaction();
+        transaction.setMembre(membre);
+        transaction.setCotisation(cotisation);
+        transaction.setMontant(10000.0);
+        transaction.setType(TypeTransaction.TONTINER);
+        
 
         given().
-                body(inscriptionCotisation).
+                body(transaction).
                 contentType(ContentType.JSON).
                 mockMvc(mockMvc).
                 when().
-                post("/inscription/cotisation/").
+                post("/transaction/cotisation/").
                 then().
                 statusCode(HttpStatus.SC_OK).
-                content("cotisation.annee", Matchers.containsString("2016"));
+                content("montant", Matchers.equalTo(10000.0));
+        
+        
     }
 
-
+/*
     @Test
     @Transactional
     public void update() {
@@ -114,16 +123,16 @@ public class InscriptionCotisationControllerTest {
         cotisation.setType(TypeCotisation.TONTINE);
         cotisation = cotisationService.create(cotisation);
 
-        InscriptionCotisation inscriptionCotisation = new InscriptionCotisation();
-        inscriptionCotisation.setMembre(membre);
-        inscriptionCotisation.setCotisation(cotisation);
+        Transaction transaction = new Transaction();
+        transaction.setMembre(membre);
+        transaction.setCotisation(cotisation);
 
-        inscriptionCotisation = inscriptionCotisationService.create(inscriptionCotisation);
+        transaction = TransactionService.create(transaction);
 
 
 
         given().
-                body(inscriptionCotisation).
+                body(transaction).
                 contentType(ContentType.JSON).
                 mockMvc(mockMvc).
                 when().
@@ -131,7 +140,7 @@ public class InscriptionCotisationControllerTest {
                 then().
                 statusCode(HttpStatus.SC_OK).
                 content("montant", Matchers.equalTo(4000.0));
-    }
+    }*/
 
 /*
     @Test

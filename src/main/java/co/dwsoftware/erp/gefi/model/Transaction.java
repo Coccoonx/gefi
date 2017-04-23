@@ -2,12 +2,11 @@ package co.dwsoftware.erp.gefi.model;
 
 import java.util.Date;
 
-import lombok.Data;
-
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToOne;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.validation.constraints.NotNull;
@@ -15,20 +14,17 @@ import javax.validation.constraints.NotNull;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.LastModifiedDate;
 
-/**
- * Created by lyonnel on 03/09/16.
- */
-@Entity
+import lombok.Data;
+
 @Data
-public class Sanction {
+@Entity
+public class Transaction {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    private long id;
-
-    private String motif;
-    
-    @CreatedDate
+	@Id
+	@GeneratedValue(strategy = GenerationType.AUTO)
+	private long id;
+	
+	@CreatedDate
     @NotNull
     @Temporal(TemporalType.TIMESTAMP)
     private Date dateCreation = new Date();
@@ -37,4 +33,33 @@ public class Sanction {
     @NotNull
     @Temporal(TemporalType.TIMESTAMP)
     private Date dateDerniereModification = new Date();
+
+	@CreatedDate
+	@NotNull
+	@Temporal(TemporalType.TIMESTAMP)
+	private Date dateOperation = new Date();
+
+	@Temporal(TemporalType.TIMESTAMP)
+	private Date dateRemboursement;
+
+	@NotNull
+	private double montant;
+	
+	
+
+	private double interet;
+
+	@ManyToOne
+	private Membre avalyseur;
+
+	private TypeTransaction type;
+
+	@ManyToOne
+	@NotNull
+	private Membre membre;
+
+	@ManyToOne
+	@NotNull
+	private Cotisation cotisation;
+
 }

@@ -3,6 +3,11 @@ package co.dwsoftware.erp.gefi.model;
 import lombok.Data;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
+
+import org.springframework.data.annotation.CreatedDate;
+import org.springframework.data.annotation.LastModifiedDate;
+
 import java.util.Date;
 
 /**
@@ -17,4 +22,14 @@ public class Aide {
     private long id;
 
     private String motif;
+    
+    @CreatedDate
+    @NotNull
+    @Temporal(TemporalType.TIMESTAMP)
+    private Date dateCreation = new Date();
+	
+	@LastModifiedDate
+    @NotNull
+    @Temporal(TemporalType.TIMESTAMP)
+    private Date dateDerniereModification = new Date();
 }

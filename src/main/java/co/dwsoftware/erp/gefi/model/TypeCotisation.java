@@ -1,6 +1,6 @@
 package co.dwsoftware.erp.gefi.model;
 
 
-public enum Type {
+public enum TypeCotisation {
     TONTINE, EPARGNE, ANNEE;
 }

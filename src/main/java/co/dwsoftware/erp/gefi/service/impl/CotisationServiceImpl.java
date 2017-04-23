@@ -1,7 +1,7 @@
 package co.dwsoftware.erp.gefi.service.impl;
 
 import co.dwsoftware.erp.gefi.model.Cotisation;
-import co.dwsoftware.erp.gefi.model.Type;
+import co.dwsoftware.erp.gefi.model.TypeCotisation;
 import co.dwsoftware.erp.gefi.repository.CotisationRepository;
 import co.dwsoftware.erp.gefi.service.CotisationService;
 import org.slf4j.Logger;
@@ -100,7 +100,7 @@ public class CotisationServiceImpl implements CotisationService {
         cotisation.setMontant(2000.0);
         cotisation.setDateDebut("2016-10-12");
         cotisation.setDateFin("2017-10-11");
-        cotisation.setType(Type.TONTINE);
+        cotisation.setType(TypeCotisation.TONTINE);
         cotisation.setAnnee("2015");
         cotisationRepository.save(cotisation);
 
@@ -109,7 +109,7 @@ public class CotisationServiceImpl implements CotisationService {
         cotisation.setMontant(50000.0);
         cotisation.setDateDebut("2016-10-13");
         cotisation.setDateFin("2017-10-12");
-        cotisation.setType(Type.TONTINE);
+        cotisation.setType(TypeCotisation.TONTINE);
         cotisation.setAnnee("2016");
         cotisationRepository.save(cotisation);
 
@@ -117,7 +117,7 @@ public class CotisationServiceImpl implements CotisationService {
         cotisation.setNom("Epargne");
         cotisation.setDateDebut("2016-10-15");
         cotisation.setDateFin("2017-10-14");
-        cotisation.setType(Type.EPARGNE);
+        cotisation.setType(TypeCotisation.EPARGNE);
         cotisation.setAnnee("2016");
         cotisationRepository.save(cotisation);
         
@@ -125,7 +125,7 @@ public class CotisationServiceImpl implements CotisationService {
         cotisation.setNom("Cotisation Annuelle");
         cotisation.setDateDebut("2016-10-15");
         cotisation.setDateFin("2017-10-14");
-        cotisation.setType(Type.ANNEE);
+        cotisation.setType(TypeCotisation.ANNEE);
         cotisation.setAnnee("2016");
         cotisationRepository.save(cotisation);
     }
