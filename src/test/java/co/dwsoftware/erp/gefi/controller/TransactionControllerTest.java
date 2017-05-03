@@ -81,7 +81,7 @@ public class TransactionControllerTest {
         cotisation.setAnnee("2016");
         cotisation.setDateDebut("2016-10-12");
         cotisation.setNom("Cotisation de 2000");
-        cotisation.setType(TypeCotisation.TONTINE);
+        cotisation.setTypeCotisation(TypeCotisation.TONTINE);
         cotisation = cotisationService.create(cotisation);
 
         Transaction transaction = new Transaction();
