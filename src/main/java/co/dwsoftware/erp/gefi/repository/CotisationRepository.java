@@ -11,13 +11,13 @@ public interface CotisationRepository extends CrudRepository<Cotisation, Long> {
 
     Cotisation findByNom(@Param("nom") String nom);
 
-    @Query("SELECT c FROM Cotisation c where c.type = 0")
+    @Query("SELECT c FROM Cotisation c where c.typeCotisation = 0")
     List<Cotisation> findByTontine();
 
-    @Query("SELECT c FROM Cotisation c where c.type = 1")
+    @Query("SELECT c FROM Cotisation c where c.typeCotisation = 1")
     List<Cotisation> findByEpargne();
 
-    @Query("SELECT c FROM Cotisation c where c.type = 2")
+    @Query("SELECT c FROM Cotisation c where c.typeCotisation = 2")
     List<Cotisation> findByAnnee();
     
     Cotisation findByAnnee(@Param("annee") String annee);

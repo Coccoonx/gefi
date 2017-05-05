@@ -42,10 +42,11 @@ public class Transaction {
 	@Temporal(TemporalType.TIMESTAMP)
 	private Date dateRemboursement;
 
-	@NotNull
 	private double montant;
 	
+	private double montantAttendu;
 	
+	private double avance;
 
 	private double interet;
 
