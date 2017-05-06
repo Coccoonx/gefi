@@ -37,7 +37,7 @@ public class Transaction {
 	@CreatedDate
 	@NotNull
 	@Temporal(TemporalType.TIMESTAMP)
-	private Date dateOperation = new Date();
+	private Date dateOperation ;
 
 	@Temporal(TemporalType.TIMESTAMP)
 	private Date dateRemboursement;
