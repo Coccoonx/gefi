@@ -42,16 +42,21 @@ public class Transaction {
 	@Temporal(TemporalType.TIMESTAMP)
 	private Date dateRemboursement;
 
-	private double montant;
+	private double montantOperation;
 	
 	private double montantAttendu;
 	
-	private double avance;
+	private double montantAvance;
 
-	private double interet;
+	private double tauxInteret;
+	
+	private double montantPenalités;
 
 	@ManyToOne
-	private Membre avalyseur;
+	private Membre avalyseur1;
+	
+	@ManyToOne
+	private Membre avalyseur2;
 
 	private TypeTransaction type;
 

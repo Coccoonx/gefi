@@ -87,7 +87,7 @@ public class TransactionControllerTest {
         Transaction transaction = new Transaction();
         transaction.setMembre(membre);
         transaction.setCotisation(cotisation);
-        transaction.setMontant(10000.0);
+        transaction.setMontantOperation(10000.0);
         transaction.setType(TypeTransaction.TONTINER);
         
 
