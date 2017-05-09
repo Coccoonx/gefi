@@ -21,7 +21,7 @@
         <profile>
             <id>local</id>
             <activation>
-                <activeByDefault>true</activeByDefault>
+                <activeByDefault>false</activeByDefault>
             </activation>
             <properties>
                 <spring.datasource.driverClassName>org.h2.Driver</spring.datasource.driverClassName>
@@ -37,13 +37,13 @@
         <profile>
             <id>dev</id>
             <activation>
-                <activeByDefault>false</activeByDefault>
+                <activeByDefault>true</activeByDefault>
             </activation>
             <properties>
                 <spring.datasource.driverClassName>org.postgresql.Driver</spring.datasource.driverClassName>
                 <spring.datasource.url>jdbc:postgresql://localhost:5432/gefidb</spring.datasource.url>
                 <spring.datasource.username>postgres</spring.datasource.username>
-                <spring.datasource.password>admin</spring.datasource.password>
+                <spring.datasource.password>root</spring.datasource.password>
                 <spring.jpa.database>POSTGRESQL</spring.jpa.database>
                 <spring.datasource.platform>postgres</spring.datasource.platform>
                 <spring.jpa.show-sql>true</spring.jpa.show-sql>
