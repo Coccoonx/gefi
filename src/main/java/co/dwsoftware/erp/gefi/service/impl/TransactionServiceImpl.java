@@ -2,8 +2,10 @@ package co.dwsoftware.erp.gefi.service.impl;
 
 import co.dwsoftware.erp.gefi.model.Cotisation;
 import co.dwsoftware.erp.gefi.model.Transaction;
+import co.dwsoftware.erp.gefi.repository.CotisationRepository;
 import co.dwsoftware.erp.gefi.repository.TransactionRepository;
 import co.dwsoftware.erp.gefi.service.TransactionService;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -17,6 +19,8 @@ public class TransactionServiceImpl implements TransactionService {
 
     @Autowired
     TransactionRepository transactionRepository;
+    @Autowired
+    CotisationRepository cotisationRepository;
 
     @Override
     public Transaction create(Transaction transaction) {
@@ -44,8 +48,15 @@ public class TransactionServiceImpl implements TransactionService {
     }
 
     @Override
-    public List<Transaction> findAllTontineByCotisation (Cotisation cotisation, long date) {
-        return transactionRepository.findAllTontinesByCotisationAndDateOperation(cotisation, date);
+    public List<Transaction> findAllTontineByCotisation (long cotisationId, long date) {
+    	
+    	Cotisation cotisation = cotisationRepository.findOne(cotisationId);
+    	if(cotisation != null){
+    		return transactionRepository.findAllTontinesByCotisationAndDateOperation(cotisation, date);
+    	}
+    	
+    	return null;
+        
     }
 
     @Override

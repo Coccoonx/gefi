@@ -40,11 +40,11 @@ public class TransactionController {
         return transactionService.findAll();
     }
 
-    @RequestMapping(value = "/transaction/cotisation/tontiner", method = RequestMethod.POST)
+    @RequestMapping(value = "/transaction/tontiner/{cotisationId}/{date}", method = RequestMethod.GET)
     @ResponseBody
     @Transactional
-    public List<Transaction> findAllByCotisation(@RequestBody Cotisation cotisation, String date) {
-        return transactionService.findAllTontineByCotisation(cotisation, Long.parseLong(date));
+    public List<Transaction> findAllByCotisation(@PathVariable("cotisationId") long cotisationId, @PathVariable("date") long date) {
+        return transactionService.findAllTontineByCotisation(cotisationId, date);
     }
 
 
