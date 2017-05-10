@@ -44,8 +44,8 @@ public class TransactionServiceImpl implements TransactionService {
     }
 
     @Override
-    public List<Transaction> findByCotisation (Cotisation cotisation) {
-        return transactionRepository.findByCotisation(cotisation);
+    public List<Transaction> findAllTontineByCotisation (Cotisation cotisation, long date) {
+        return transactionRepository.findAllTontinesByCotisationAndDateOperation(cotisation, date);
     }
 
     @Override

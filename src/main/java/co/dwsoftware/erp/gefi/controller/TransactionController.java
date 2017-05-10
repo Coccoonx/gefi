@@ -14,42 +14,41 @@ import java.util.List;
  * Created by lyonnel on 02/09/16.
  */
 @Controller
-@RequestMapping("/transaction")
 public class TransactionController {
 
     @Autowired
     TransactionService transactionService;
 
-    @RequestMapping(value = "/cotisation/", method = RequestMethod.POST)
+    @RequestMapping(value = "/transaction/", method = RequestMethod.POST)
     @ResponseBody
     @Transactional
-    public Transaction createTransaction(@RequestBody Transaction inscription) {
-        return transactionService.create(inscription);
+    public Transaction createTransaction(@RequestBody Transaction transaction) {
+        return transactionService.create(transaction);
     }
 
-    @RequestMapping(value = "/cotisation/", method = RequestMethod.PUT)
+    @RequestMapping(value = "/transaction/", method = RequestMethod.PUT)
     @ResponseBody
     @Transactional
-    public Transaction updateTransaction(@RequestBody Transaction inscription) {
-        return transactionService.update(inscription);
+    public Transaction updateTransaction(@RequestBody Transaction transaction) {
+        return transactionService.update(transaction);
     }
 
-    @RequestMapping(value = "/cotisation/", method = RequestMethod.GET)
+    @RequestMapping(value = "/transaction/", method = RequestMethod.GET)
     @ResponseBody
     @Transactional
     public List<Transaction> findAll() {
         return transactionService.findAll();
     }
 
-    @RequestMapping(value = "/cotisation/element", method = RequestMethod.POST)
+    @RequestMapping(value = "/transaction/cotisation/tontiner", method = RequestMethod.POST)
     @ResponseBody
     @Transactional
-    public List<Transaction> findAllByCotisation(@RequestBody Cotisation cotisation) {
-        return transactionService.findByCotisation(cotisation);
+    public List<Transaction> findAllByCotisation(@RequestBody Cotisation cotisation, String date) {
+        return transactionService.findAllTontineByCotisation(cotisation, Long.parseLong(date));
     }
 
 
-    @RequestMapping(value = "/cotisation/{inscriptionId}", method = RequestMethod.DELETE)
+    @RequestMapping(value = "/transaction/{transactionId}", method = RequestMethod.DELETE)
     @ResponseBody
     @Transactional
     public void deleteTransaction(@PathVariable long transactionId) {

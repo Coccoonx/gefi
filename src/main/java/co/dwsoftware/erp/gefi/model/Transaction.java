@@ -14,6 +14,8 @@ import javax.validation.constraints.NotNull;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.LastModifiedDate;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+
 import lombok.Data;
 
 @Data
@@ -24,35 +26,42 @@ public class Transaction {
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private long id;
 	
-	@CreatedDate
+	//@CreatedDate
     @NotNull
-    @Temporal(TemporalType.TIMESTAMP)
-    private Date dateCreation = new Date();
+    //@Temporal(TemporalType.TIMESTAMP)
+    private long dateCreation ;
 	
-	@LastModifiedDate
+	//@LastModifiedDate
     @NotNull
-    @Temporal(TemporalType.TIMESTAMP)
-    private Date dateDerniereModification = new Date();
+    //@Temporal(TemporalType.TIMESTAMP)
+    private long dateDerniereModification;
 
-	@CreatedDate
+//	@CreatedDate
 	@NotNull
-	@Temporal(TemporalType.TIMESTAMP)
-	private Date dateOperation ;
+//	@Temporal(TemporalType.TIMESTAMP)
+//	@JsonFormat(shape=JsonFormat.Shape.STRING, pattern = "MMM dd, yyyy hh:mm:ss aa", timezone="Africa/Douala")
+	private long dateOperation ;
 
-	@Temporal(TemporalType.TIMESTAMP)
-	private Date dateRemboursement;
+//	@Temporal(TemporalType.TIMESTAMP)
+	private long dateRemboursement;
 
-	private double montant;
+	private double montantOperation;
 	
 	private double montantAttendu;
 	
-	private double avance;
+	private double montantAvance;
 
-	private double interet;
+	private double tauxInteret;
+	
+	private double montantPenalités;
 
 	@ManyToOne
-	private Membre avalyseur;
+	private Membre avaliseur1;
+	
+	@ManyToOne
+	private Membre avaliseur2;
 
+	@NotNull
 	private TypeTransaction type;
 
 	@ManyToOne
@@ -62,5 +71,11 @@ public class Transaction {
 	@ManyToOne
 	@NotNull
 	private Cotisation cotisation;
+	
+	public Transaction(){
+		dateCreation = new Date().getTime();
+		
+		dateDerniereModification = new Date().getTime();
+	}
 
 }
