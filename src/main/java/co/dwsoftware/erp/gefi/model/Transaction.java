@@ -53,7 +53,7 @@ public class Transaction {
 
 	private double tauxInteret;
 	
-	private double montantPenalités;
+	private double montantPenalites;
 
 	@ManyToOne
 	private Membre avaliseur1;
