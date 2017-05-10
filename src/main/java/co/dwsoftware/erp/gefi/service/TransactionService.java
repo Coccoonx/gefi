@@ -10,7 +10,7 @@ public interface TransactionService {
 
     Transaction create(Transaction inscription);
     Transaction update(Transaction inscription);
-    List<Transaction> findAllTontineByCotisation(Cotisation cotisation, long date);
+    List<Transaction> findAllTontineByCotisation(long cotisationId, long date);
     List<Transaction> findAll();
     void delete(Long Id);
 
