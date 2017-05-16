@@ -25,7 +25,7 @@ public class TransactionServiceImpl implements TransactionService {
     @Override
     public Transaction create(Transaction transaction) {
 
-        Transaction exist = transactionRepository.findByMembreAndCotisation(transaction.getMembre(), transaction.getCotisation());
+        Transaction exist = transactionRepository.findByMembreAndCotisationAndDate(transaction.getMembre(), transaction.getCotisation(), transaction.getDateOperation());
         if (exist != null) {
             throw new IllegalArgumentException("transaction already exists");
         }
