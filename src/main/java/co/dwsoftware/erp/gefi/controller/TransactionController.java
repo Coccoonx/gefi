@@ -11,47 +11,89 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 /**
+ *
  * Created by lyonnel on 02/09/16.
+ *
  */
 @Controller
 public class TransactionController {
 
-    @Autowired
-    TransactionService transactionService;
+	@Autowired
+	TransactionService transactionService;
 
-    @RequestMapping(value = "/transaction/", method = RequestMethod.POST)
-    @ResponseBody
-    @Transactional
-    public Transaction createTransaction(@RequestBody Transaction transaction) {
-        return transactionService.create(transaction);
-    }
+	@RequestMapping(value = "/transaction/", method = RequestMethod.POST)
+	@ResponseBody
+	@Transactional
+	public Transaction createTransaction(@RequestBody Transaction transaction) {
+		return transactionService.create(transaction);
+	}
 
-    @RequestMapping(value = "/transaction/", method = RequestMethod.PUT)
-    @ResponseBody
-    @Transactional
-    public Transaction updateTransaction(@RequestBody Transaction transaction) {
-        return transactionService.update(transaction);
-    }
+	@RequestMapping(value = "/transaction/", method = RequestMethod.PUT)
+	@ResponseBody
+	@Transactional
+	public Transaction updateTransaction(@RequestBody Transaction transaction) {
+		return transactionService.update(transaction);
+	}
 
-    @RequestMapping(value = "/transaction/", method = RequestMethod.GET)
-    @ResponseBody
-    @Transactional
-    public List<Transaction> findAll() {
-        return transactionService.findAll();
-    }
+	@RequestMapping(value = "/transaction/", method = RequestMethod.GET)
+	@ResponseBody
+	@Transactional
+	public List<Transaction> findAll() {
+		return transactionService.findAll();
+	}
 
-    @RequestMapping(value = "/transaction/tontiner/{cotisationId}/{date}", method = RequestMethod.GET)
-    @ResponseBody
-    @Transactional
-    public List<Transaction> findAllByCotisation(@PathVariable("cotisationId") long cotisationId, @PathVariable("date") long date) {
-        return transactionService.findAllTontineByCotisation(cotisationId, date);
-    }
+	@RequestMapping(value = "/transaction/tontiner/{date}", method = RequestMethod.GET)
+	@ResponseBody
+	@Transactional
+	public List<Transaction> findAllWinneableTontineByDate(
+			@PathVariable("date") long date) {
+		return transactionService.findAllWinneableTontineByDate(date);
+	}
 
+	@RequestMapping(value = "/transaction/tontiner/{cotisationId}/{date}", method = RequestMethod.GET)
+	@ResponseBody
+	@Transactional
+	public List<Transaction> findAllTontineByCotisationAndDate(
+			@PathVariable("cotisationId") long cotisationId,
+			@PathVariable("date") long date) {
+		return transactionService.findAllTontineByCotisationAndDate(
+				cotisationId, date);
+	}
 
-    @RequestMapping(value = "/transaction/{transactionId}", method = RequestMethod.DELETE)
-    @ResponseBody
-    @Transactional
-    public void deleteTransaction(@PathVariable long transactionId) {
-        transactionService.delete(transactionId);
-    }
+	@RequestMapping(value = "/transaction/beneficier/{cotisationId}/{date}", method = RequestMethod.GET)
+	@ResponseBody
+	@Transactional
+	public List<Transaction> findAllBeneficeByCotisationAndDate(
+			@PathVariable("cotisationId") long cotisationId,
+			@PathVariable("date") long date) {
+		return transactionService.findAllBeneficeByCotisationAndDate(
+				cotisationId, date);
+	}
+
+	@RequestMapping(value = "/transaction/emprunter/{cotisationId}/{date}", method = RequestMethod.GET)
+	@ResponseBody
+	@Transactional
+	public List<Transaction> findAllPretByCotisationAndDate(
+			@PathVariable("cotisationId") long cotisationId,
+			@PathVariable("date") long date) {
+		return transactionService.findAllPretByCotisationAndDate(cotisationId,
+				date);
+	}
+
+	@RequestMapping(value = "/transaction/rembourser/{cotisationId}/{date}", method = RequestMethod.GET)
+	@ResponseBody
+	@Transactional
+	public List<Transaction> findAllRemboursementByCotisationAndDate(
+			@PathVariable("cotisationId") long cotisationId,
+			@PathVariable("date") long date) {
+		return transactionService.findAllRemboursementByCotisationAndDate(
+				cotisationId, date);
+	}
+
+	@RequestMapping(value = "/transaction/{transactionId}", method = RequestMethod.DELETE)
+	@ResponseBody
+	@Transactional
+	public void deleteTransaction(@PathVariable long transactionId) {
+		transactionService.delete(transactionId);
+	}
 }
