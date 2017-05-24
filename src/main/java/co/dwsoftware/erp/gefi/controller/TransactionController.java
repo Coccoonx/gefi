@@ -79,6 +79,33 @@ public class TransactionController {
 		return transactionService.findAllPretByCotisationAndDate(cotisationId,
 				date);
 	}
+	
+	@RequestMapping(value = "/transaction/epargnes/{cotisationId}/{membreId}", method = RequestMethod.GET)
+	@ResponseBody
+	@Transactional
+	public List<Transaction> findAllEpargneByCotisationAndMembre(
+			@PathVariable("cotisationId") long cotisationId,
+			@PathVariable("membreId") long membreId) {
+		return transactionService.findAllEpargneByCotisationAndMembre(cotisationId,
+				membreId);
+	}
+	
+	@RequestMapping(value = "/transaction/epargnes/{cotisationId}", method = RequestMethod.GET)
+	@ResponseBody
+	@Transactional
+	public List<Transaction> findAllEpargneByCotisation(
+			@PathVariable("cotisationId") long cotisationId) {
+		return transactionService.findAllEpargneByCotisation(cotisationId);
+	}
+	
+	@RequestMapping(value = "/transaction/epargnes/suivi/{cotisationId}", method = RequestMethod.GET)
+	@ResponseBody
+	@Transactional
+	public List<Transaction> findAllEpargneByCotisationSuivi(
+			@PathVariable("cotisationId") long cotisationId) {
+		return transactionService.findAllEpargneByCotisationSuivi(cotisationId);
+	}
+
 
 	@RequestMapping(value = "/transaction/rembourser/{cotisationId}/{date}", method = RequestMethod.GET)
 	@ResponseBody
