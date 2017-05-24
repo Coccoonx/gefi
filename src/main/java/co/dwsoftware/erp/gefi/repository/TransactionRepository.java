@@ -31,7 +31,7 @@ public interface TransactionRepository extends CrudRepository<Transaction, Long>
     @Query("SELECT t FROM Transaction t WHERE t.membre = :membre AND t.cotisation = :cotisation ")
     Transaction findByMembreAndCotisation(@Param("membre") Membre membre, @Param("cotisation") Cotisation cotisation);
     
-    @Query("SELECT t FROM Transaction t WHERE t.membre = :membre AND t.cotisation = :cotisation AND t.dateOperation = :dateOperation")
-    Transaction findByMembreAndCotisationAndDate(@Param("membre") Membre membre, @Param("cotisation") Cotisation cotisation, @Param("dateOperation") long dateOperation);
+    @Query("SELECT t FROM Transaction t WHERE t.membre = :membre AND t.cotisation = :cotisation AND t.dateOperation = :dateOperation AND t.type = :type")
+    Transaction findByMembreAndCotisationAndDateAndType(@Param("membre") Membre membre, @Param("cotisation") Cotisation cotisation, @Param("dateOperation") long dateOperation, @Param("type") TypeTransaction type);
 
 }

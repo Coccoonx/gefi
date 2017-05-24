@@ -29,9 +29,10 @@ public class TransactionServiceImpl implements TransactionService {
 	public Transaction create(Transaction transaction) {
 
 		Transaction exist = transactionRepository
-				.findByMembreAndCotisationAndDate(transaction.getMembre(),
+				.findByMembreAndCotisationAndDateAndType(transaction.getMembre(),
 						transaction.getCotisation(),
-						transaction.getDateOperation());
+						transaction.getDateOperation(),
+						transaction.getType());
 		if (exist != null) {
 			throw new IllegalArgumentException("transaction already exists");
 		}

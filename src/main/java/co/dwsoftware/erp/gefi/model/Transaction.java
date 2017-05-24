@@ -25,39 +25,41 @@ public class Transaction {
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private long id;
-	
-	//@CreatedDate
-    @NotNull
-    //@Temporal(TemporalType.TIMESTAMP)
-    private long dateCreation ;
-	
-	//@LastModifiedDate
-    @NotNull
-    //@Temporal(TemporalType.TIMESTAMP)
-    private long dateDerniereModification;
 
-//	@CreatedDate
 	@NotNull
-//	@Temporal(TemporalType.TIMESTAMP)
-//	@JsonFormat(shape=JsonFormat.Shape.STRING, pattern = "MMM dd, yyyy hh:mm:ss aa", timezone="Africa/Douala")
-	private long dateOperation ;
+	private long dateCreation;
 
-//	@Temporal(TemporalType.TIMESTAMP)
+	@NotNull
+	private long dateDerniereModification;
+
+	@NotNull
+	private long dateOperation;
+
 	private long dateRemboursement;
 
+	private int duree;
+
+	private double nombre; // Durée * Montant
+
 	private double montantOperation;
-	
+
 	private double montantAttendu;
-	
+
 	private double montantAvance;
 
 	private double tauxInteret;
-	
+
 	private double montantPenalites;
+
+    private double montantBeneficie;
+
+    private double montantRetenu;
+
+    private double montantPlace;
 
 	@ManyToOne
 	private Membre avaliseur1;
-	
+
 	@ManyToOne
 	private Membre avaliseur2;
 
@@ -71,10 +73,10 @@ public class Transaction {
 	@ManyToOne
 	@NotNull
 	private Cotisation cotisation;
-	
-	public Transaction(){
+
+	public Transaction() {
 		dateCreation = new Date().getTime();
-		
+
 		dateDerniereModification = new Date().getTime();
 	}
 
