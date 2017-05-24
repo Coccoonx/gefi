@@ -1,37 +1,45 @@
 package co.dwsoftware.erp.gefi.service.impl;
 
 import co.dwsoftware.erp.gefi.model.Cotisation;
+import co.dwsoftware.erp.gefi.model.Membre;
 import co.dwsoftware.erp.gefi.model.Transaction;
 import co.dwsoftware.erp.gefi.model.TypeTransaction;
 import co.dwsoftware.erp.gefi.repository.CotisationRepository;
+import co.dwsoftware.erp.gefi.repository.MembreRepository;
 import co.dwsoftware.erp.gefi.repository.TransactionRepository;
 import co.dwsoftware.erp.gefi.service.TransactionService;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 /**
  * Created by lyonnel on 02/09/16.
  */
 @Component
 public class TransactionServiceImpl implements TransactionService {
+	private Logger logger = LoggerFactory.getLogger(this.getClass());
 
 	@Autowired
 	TransactionRepository transactionRepository;
 	@Autowired
 	CotisationRepository cotisationRepository;
+	@Autowired
+	MembreRepository membreRepository;
 
 	@Override
 	public Transaction create(Transaction transaction) {
 
 		Transaction exist = transactionRepository
-				.findByMembreAndCotisationAndDate(transaction.getMembre(),
-						transaction.getCotisation(),
-						transaction.getDateOperation());
+				.findByMembreAndCotisationAndDateAndType(
+						transaction.getMembre(), transaction.getCotisation(),
+						transaction.getDateOperation(), transaction.getType());
 		if (exist != null) {
 			throw new IllegalArgumentException("transaction already exists");
 		}
@@ -143,6 +151,99 @@ public class TransactionServiceImpl implements TransactionService {
 			return transactionRepository
 					.findAllRemboursementsByCotisationAndDateOperation(
 							cotisation, date);
+		}
+
+		return null;
+
+	}
+
+	@Override
+	public List<Transaction> findAllEpargneByCotisationAndMembre(
+			long cotisationId, long membreId) {
+
+		Cotisation cotisation = cotisationRepository.findOne(cotisationId);
+		Membre membre = membreRepository.findOne(membreId);
+
+		logger.info("Params cotisation{}, membre{}", cotisation, membre);
+		if (cotisation != null && membre != null) {
+			return transactionRepository.findAllEpargnesByCotisationAndMembre(
+					cotisation, membre);
+		}
+
+		return null;
+
+	}
+
+	@Override
+	public List<Transaction> findAllEpargneByCotisation(long cotisationId) {
+
+		Cotisation cotisation = cotisationRepository.findOne(cotisationId);
+
+		logger.info("Params cotisation{}, membre{}", cotisation);
+		if (cotisation != null) {
+			List<Transaction> transactions = transactionRepository.findAllEpargnesByCotisation(
+					cotisation);
+			
+			Set<Membre> epargneurs = new HashSet<>();
+			List<Transaction> tuples = new ArrayList<>();
+			for(Transaction t : transactions){
+				if(!epargneurs.contains(t.getMembre()))
+				epargneurs.add(t.getMembre());
+			}
+			
+			for(Membre m: epargneurs){
+				Transaction t =new Transaction();
+				t.setCotisation(cotisation);
+				t.setMembre(m);
+				t.setMontantOperation(0.0);
+				t.setType(TypeTransaction.EPARGNER);
+				for(Transaction tmp : transactions){
+					if(tmp.getMembre().equals(m)){
+						t.setMontantOperation(t.getMontantOperation()+tmp.getMontantOperation());
+					}
+				}
+				tuples.add(t);
+				
+			}
+			return tuples;
+		}
+
+		return null;
+
+	}
+	
+	@Override
+	public List<Transaction> findAllEpargneByCotisationSuivi(long cotisationId) {
+
+		Cotisation cotisation = cotisationRepository.findOne(cotisationId);
+
+		logger.info("Params cotisation{}, membre{}", cotisation);
+		if (cotisation != null) {
+			List<Transaction> transactions = transactionRepository.findAllEpargnesByCotisation(
+					cotisation);
+			
+			Set<Long> jours = new HashSet<>();
+			List<Transaction> tuples = new ArrayList<>();
+			for(Transaction t : transactions){
+				if(!jours.contains(t.getDateOperation()))
+					jours.add(t.getDateOperation());
+			}
+			
+			for(Long j : jours){
+				Transaction t =new Transaction();
+				t.setDateOperation(j);
+				t.setCotisation(cotisation);
+				t.setMontantOperation(0.0);
+				t.setType(TypeTransaction.EPARGNER);
+				for(Transaction tmp : transactions){
+					if(tmp.getDateOperation()== j){
+						t.setMontantOperation(t.getMontantOperation()+tmp.getMontantOperation());
+					}
+				}
+				tuples.add(t);
+				
+			}
+			return tuples;
 		}
 
 		return null;
