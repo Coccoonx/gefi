@@ -66,7 +66,7 @@ public class MembreServiceImpl implements MembreService {
         membreRepository.delete(id);
     }
 
-//    @PostConstruct
+    @PostConstruct
     public void populate(){
         Membre membre = new Membre();
         membre.setNom("Kamga");

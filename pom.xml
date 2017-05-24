@@ -48,7 +48,7 @@
                 <spring.datasource.platform>postgres</spring.datasource.platform>
                 <spring.jpa.show-sql>true</spring.jpa.show-sql>
 
-                <spring.jpa.hibernate.ddl-auto>update</spring.jpa.hibernate.ddl-auto>
+                <spring.jpa.hibernate.ddl-auto>create-update</spring.jpa.hibernate.ddl-auto>
             </properties>
         </profile>
     </profiles>
