@@ -15,7 +15,6 @@ public interface TransactionRepository extends CrudRepository<Transaction, Long>
 	@Query("SELECT t FROM Transaction t WHERE t.dateOperation = :dateOperation AND t.type = 1")
     List<Transaction> findAllWinneableTontineByDate(@Param("dateOperation") long dateOperation);
 	
-	
 	@Query("SELECT t FROM Transaction t WHERE t.cotisation = :cotisation AND t.dateOperation = :dateOperation AND t.type = 0")
     List<Transaction> findAllBeneficesByCotisationAndDateOperation(@Param("cotisation") Cotisation cotisation, @Param("dateOperation") long dateOperation);
 	
@@ -24,6 +23,9 @@ public interface TransactionRepository extends CrudRepository<Transaction, Long>
 	
 	@Query("SELECT t FROM Transaction t WHERE t.cotisation = :cotisation AND t.dateOperation = :dateOperation AND t.type = 2")
     List<Transaction> findAllPretsByCotisationAndDateOperation(@Param("cotisation") Cotisation cotisation, @Param("dateOperation") long dateOperation);
+	
+	@Query("SELECT t FROM Transaction t WHERE t.cotisation = :cotisation AND t.type = 2")
+    List<Transaction> findAllPretsSuiviByCotisation(@Param("cotisation") Cotisation cotisation);
 	
 	@Query("SELECT t FROM Transaction t WHERE t.cotisation = :cotisation AND t.dateOperation = :dateOperation AND t.type = 3")
     List<Transaction> findAllRemboursementsByCotisationAndDateOperation(@Param("cotisation") Cotisation cotisation, @Param("dateOperation") long dateOperation);

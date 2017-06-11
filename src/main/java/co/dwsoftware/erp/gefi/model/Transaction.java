@@ -56,6 +56,9 @@ public class Transaction {
     private double montantRetenu;
 
     private double montantPlace;
+    
+    private long idTransactionOrigine;
+
 
 	@ManyToOne
 	private Membre avaliseur1;

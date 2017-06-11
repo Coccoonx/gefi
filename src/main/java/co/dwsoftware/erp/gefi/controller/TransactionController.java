@@ -105,6 +105,22 @@ public class TransactionController {
 			@PathVariable("cotisationId") long cotisationId) {
 		return transactionService.findAllEpargneByCotisationSuivi(cotisationId);
 	}
+	
+	@RequestMapping(value = "/transaction/prets/suivi/{cotisationId}", method = RequestMethod.GET)
+	@ResponseBody
+	@Transactional
+	public List<Transaction> findAllPretsSuiviByCotisationSuivi(
+			@PathVariable("cotisationId") long cotisationId) {
+		return transactionService.findAllPretSuiviByCotisation(cotisationId);
+	}
+	
+	@RequestMapping(value = "/transaction/prets/remboursement/{cotisationId}", method = RequestMethod.GET)
+	@ResponseBody
+	@Transactional
+	public List<Transaction> findAllPretsRemboursementByCotisation(
+			@PathVariable("cotisationId") long cotisationId) {
+		return transactionService.findAllPretSuiviByCotisation(cotisationId);
+	}
 
 
 	@RequestMapping(value = "/transaction/rembourser/{cotisationId}/{date}", method = RequestMethod.GET)

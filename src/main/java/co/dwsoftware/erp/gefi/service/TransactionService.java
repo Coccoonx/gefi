@@ -13,6 +13,7 @@ public interface TransactionService {
     List<Transaction> findAllTontineByCotisationAndDate(long cotisationId, long date);
     List<Transaction> findAllBeneficeByCotisationAndDate(long cotisationId, long date);
     List<Transaction> findAllPretByCotisationAndDate(long cotisationId, long date);
+    List<Transaction> findAllPretSuiviByCotisation(long cotisationId);
     List<Transaction> findAllRemboursementByCotisationAndDate(long cotisationId, long date);
     List<Transaction> findAllEpargneByCotisationAndMembre(long cotisationId, long membreId);
     List<Transaction> findAllEpargneByCotisation(long cotisationId);
