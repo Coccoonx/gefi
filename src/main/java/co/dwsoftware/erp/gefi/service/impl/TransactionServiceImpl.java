@@ -39,7 +39,7 @@ public class TransactionServiceImpl implements TransactionService {
 		Transaction exist = transactionRepository
 				.findByMembreAndCotisationAndDateAndType(
 						transaction.getMembre(), transaction.getCotisation(),
-						transaction.getDateOperation(), transaction.getType());
+						transaction.getDateTransaction(), transaction.getType());
 		if (exist != null) {
 			throw new IllegalArgumentException("transaction already exists");
 		}
@@ -69,7 +69,7 @@ public class TransactionServiceImpl implements TransactionService {
 		Cotisation cotisation = cotisationRepository.findOne(cotisationId);
 		if (cotisation != null) {
 			return transactionRepository
-					.findAllTontinesByCotisationAndDateOperation(cotisation,
+					.findAllTontinesByCotisationAndDateTransaction(cotisation,
 							date);
 		}
 
@@ -93,14 +93,14 @@ public class TransactionServiceImpl implements TransactionService {
 			}
 			for (Cotisation cotisation : cotisations) {
 				Transaction tuple = new Transaction();
-				tuple.setDateOperation(date);
+				tuple.setDateTransaction(date);
 				tuple.setCotisation(cotisation);
-				tuple.setMontantOperation(0.0);
+				tuple.setMontantTransaction(0.0);
 				tuple.setType(TypeTransaction.TONTINER);
 				for (Transaction tmp : transactionsTontine) {
 					if (tmp.getCotisation().getId() == cotisation.getId())
-						tuple.setMontantOperation(tuple.getMontantOperation()
-								+ tmp.getMontantOperation());
+						tuple.setMontantTransaction(tuple.getMontantTransaction()
+								+ tmp.getMontantTransaction());
 				}
 				result.add(tuple);
 
@@ -120,7 +120,7 @@ public class TransactionServiceImpl implements TransactionService {
 		Cotisation cotisation = cotisationRepository.findOne(cotisationId);
 		if (cotisation != null) {
 			return transactionRepository
-					.findAllBeneficesByCotisationAndDateOperation(cotisation,
+					.findAllBeneficesByCotisationAndDateTransaction(cotisation,
 							date);
 		}
 
@@ -135,7 +135,7 @@ public class TransactionServiceImpl implements TransactionService {
 		Cotisation cotisation = cotisationRepository.findOne(cotisationId);
 		if (cotisation != null) {
 			return transactionRepository
-					.findAllPretsByCotisationAndDateOperation(cotisation, date);
+					.findAllPretsByCotisationAndDateTransaction(cotisation, date);
 		}
 
 		return null;
@@ -149,7 +149,7 @@ public class TransactionServiceImpl implements TransactionService {
 		Cotisation cotisation = cotisationRepository.findOne(cotisationId);
 		if (cotisation != null) {
 			return transactionRepository
-					.findAllRemboursementsByCotisationAndDateOperation(
+					.findAllRemboursementsByCotisationAndDateTransaction(
 							cotisation, date);
 		}
 
@@ -195,11 +195,11 @@ public class TransactionServiceImpl implements TransactionService {
 				Transaction t =new Transaction();
 				t.setCotisation(cotisation);
 				t.setMembre(m);
-				t.setMontantOperation(0.0);
+				t.setMontantTransaction(0.0);
 				t.setType(TypeTransaction.EPARGNER);
 				for(Transaction tmp : transactions){
 					if(tmp.getMembre().equals(m)){
-						t.setMontantOperation(t.getMontantOperation()+tmp.getMontantOperation());
+						t.setMontantTransaction(t.getMontantTransaction()+tmp.getMontantTransaction());
 					}
 				}
 				tuples.add(t);
@@ -225,19 +225,19 @@ public class TransactionServiceImpl implements TransactionService {
 			Set<Long> jours = new HashSet<>();
 			List<Transaction> tuples = new ArrayList<>();
 			for(Transaction t : transactions){
-				if(!jours.contains(t.getDateOperation()))
-					jours.add(t.getDateOperation());
+				if(!jours.contains(t.getDateTransaction()))
+					jours.add(t.getDateTransaction());
 			}
 			
 			for(Long j : jours){
 				Transaction t =new Transaction();
-				t.setDateOperation(j);
+				t.setDateTransaction(j);
 				t.setCotisation(cotisation);
-				t.setMontantOperation(0.0);
+				t.setMontantTransaction(0.0);
 				t.setType(TypeTransaction.EPARGNER);
 				for(Transaction tmp : transactions){
-					if(tmp.getDateOperation()== j){
-						t.setMontantOperation(t.getMontantOperation()+tmp.getMontantOperation());
+					if(tmp.getDateTransaction()== j){
+						t.setMontantTransaction(t.getMontantTransaction()+tmp.getMontantTransaction());
 					}
 				}
 				tuples.add(t);

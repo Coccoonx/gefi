@@ -33,7 +33,7 @@ public class Transaction {
 	private long dateDerniereModification;
 
 	@NotNull
-	private long dateOperation;
+	private long dateTransaction;
 
 	private long dateRemboursement;
 
@@ -41,7 +41,7 @@ public class Transaction {
 
 	private double nombre; // Durée * Montant
 
-	private double montantOperation;
+	private double montantTransaction;
 
 	private double montantAttendu;
 
