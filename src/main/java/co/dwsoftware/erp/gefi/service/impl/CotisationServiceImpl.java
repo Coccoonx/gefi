@@ -93,7 +93,7 @@ public class CotisationServiceImpl implements CotisationService {
         cotisationRepository.delete(id);
     }
 
-    //@PostConstruct
+    @PostConstruct
     private void populateAnnee() {
         Cotisation cotisation = new Cotisation();
         cotisation.setNom("Tontine 2000");
