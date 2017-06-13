@@ -147,30 +147,70 @@ public class TransactionServiceImpl implements TransactionService {
 
 		Cotisation cotisation = cotisationRepository.findOne(cotisationId);
 		if (cotisation != null) {
-			List<Transaction>  transactions = transactionRepository
+			List<Transaction> transactions = transactionRepository
 					.findAllPretsSuiviByCotisation(cotisation);
-			
+
 			Set<Long> jours = new HashSet<>();
 			List<Transaction> tuples = new ArrayList<>();
-			for(Transaction t : transactions){
-				if(!jours.contains(t.getDateOperation()))
+			for (Transaction t : transactions) {
+				if (!jours.contains(t.getDateOperation()))
 					jours.add(t.getDateOperation());
 			}
-			
-			for(Long j : jours){
+
+			for (Long j : jours) {
 				Transaction t = new Transaction();
 				t.setDateOperation(j);
 				t.setCotisation(cotisation);
 				t.setMontantOperation(0.0);
 				t.setType(TypeTransaction.EMPRUNTER);
-				t.setMembre(membre);
-				for(Transaction tmp : transactions){
-					if(tmp.getDateOperation()== j){
-						t.setMontantOperation(t.getMontantOperation()+tmp.getMontantOperation());
+				// t.setMembre(membre);
+				for (Transaction tmp : transactions) {
+					if (tmp.getDateOperation() == j) {
+						t.setMontantOperation(t.getMontantOperation()
+								+ tmp.getMontantOperation());
 					}
 				}
 				tuples.add(t);
-				
+
+			}
+			return tuples;
+		}
+
+		return null;
+
+	}
+	
+	
+	@Override
+	public List<Transaction> findAllRemboursementSuiviByCotisation(long cotisationId) {
+
+		Cotisation cotisation = cotisationRepository.findOne(cotisationId);
+		if (cotisation != null) {
+			List<Transaction> transactions = transactionRepository
+					.findAllRemboursementsSuiviByCotisation(cotisation);
+
+			Set<Long> jours = new HashSet<>();
+			List<Transaction> tuples = new ArrayList<>();
+			for (Transaction t : transactions) {
+				if (!jours.contains(t.getDateOperation()))
+					jours.add(t.getDateOperation());
+			}
+
+			for (Long j : jours) {
+				Transaction t = new Transaction();
+				t.setDateOperation(j);
+				t.setCotisation(cotisation);
+				t.setMontantOperation(0.0);
+				t.setType(TypeTransaction.REMBOURSER);
+				// t.setMembre(membre);
+				for (Transaction tmp : transactions) {
+					if (tmp.getDateOperation() == j) {
+						t.setMontantOperation(t.getMontantOperation()
+								+ tmp.getMontantOperation());
+					}
+				}
+				tuples.add(t);
+
 			}
 			return tuples;
 		}
@@ -188,6 +228,19 @@ public class TransactionServiceImpl implements TransactionService {
 			return transactionRepository
 					.findAllRemboursementsByCotisationAndDateOperation(
 							cotisation, date);
+		}
+
+		return null;
+
+	}
+
+	@Override
+	public List<Transaction> findAllRemboursementByCotisation(long cotisationId) {
+
+		Cotisation cotisation = cotisationRepository.findOne(cotisationId);
+		if (cotisation != null) {
+			return transactionRepository
+					.findAllRemboursementsByCotisation(cotisation);
 		}
 
 		return null;

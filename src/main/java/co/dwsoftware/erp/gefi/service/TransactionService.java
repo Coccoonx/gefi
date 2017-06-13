@@ -14,7 +14,9 @@ public interface TransactionService {
     List<Transaction> findAllBeneficeByCotisationAndDate(long cotisationId, long date);
     List<Transaction> findAllPretByCotisationAndDate(long cotisationId, long date);
     List<Transaction> findAllPretSuiviByCotisation(long cotisationId);
+    List<Transaction> findAllRemboursementSuiviByCotisation(long cotisationId);
     List<Transaction> findAllRemboursementByCotisationAndDate(long cotisationId, long date);
+    List<Transaction> findAllRemboursementByCotisation(long cotisationId);
     List<Transaction> findAllEpargneByCotisationAndMembre(long cotisationId, long membreId);
     List<Transaction> findAllEpargneByCotisation(long cotisationId);
     List<Transaction> findAllEpargneByCotisationSuivi(long cotisationId);
