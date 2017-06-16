@@ -1,7 +1,7 @@
 package co.dwsoftware.erp.gefi.controller;
 
-import co.dwsoftware.erp.gefi.model.Aide;
-import co.dwsoftware.erp.gefi.service.AideService;
+import co.dwsoftware.erp.gefi.model.Service;
+import co.dwsoftware.erp.gefi.service.AideSanctionService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.transaction.annotation.Transactional;
@@ -16,34 +16,34 @@ import java.util.List;
 public class AideController {
 
     @Autowired
-    AideService aideService;
+    AideSanctionService aideSanctionService;
 
-    @RequestMapping(value = "/aide/", method = RequestMethod.POST)
+    @RequestMapping(value = "/service/", method = RequestMethod.POST)
     @ResponseBody
     @Transactional
-    public Aide createAide(@RequestBody Aide aide) {
-        return aideService.create(aide);
+    public Service createAide(@RequestBody Service service) {
+        return aideSanctionService.create(service);
     }
 
-    @RequestMapping(value = "/aide/", method = RequestMethod.PUT)
+    @RequestMapping(value = "/service/", method = RequestMethod.PUT)
     @ResponseBody
     @Transactional
-    public Aide updateAide(@RequestBody Aide aide) {
-        return aideService.update(aide);
+    public Service updateAide(@RequestBody Service service) {
+        return aideSanctionService.update(service);
     }
 
-    @RequestMapping(value = "/aide/", method = RequestMethod.GET)
+    @RequestMapping(value = "/service/", method = RequestMethod.GET)
     @ResponseBody
     @Transactional
-    public List<Aide> findAll() {
-        return aideService.findAll();
+    public List<Service> findAll() {
+        return aideSanctionService.findAll();
     }
 
 
-    @RequestMapping(value = "/aide/{aideId}", method = RequestMethod.DELETE)
+    @RequestMapping(value = "/service/{aideId}", method = RequestMethod.DELETE)
     @ResponseBody
     @Transactional
     public void deleteAide(@PathVariable long aideId) {
-        aideService.delete(aideId);
+        aideSanctionService.delete(aideId);
     }
 }

@@ -1,26 +1,21 @@
 package co.dwsoftware.erp.gefi.model;
 
-import java.util.Date;
-
 import lombok.Data;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.Temporal;
-import javax.persistence.TemporalType;
+import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.LastModifiedDate;
+
+import java.util.Date;
 
 /**
  * Created by lyonnel on 03/09/16.
  */
 @Entity
 @Data
-public class Sanction {
+public class Service {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -37,4 +32,7 @@ public class Sanction {
     @NotNull
     @Temporal(TemporalType.TIMESTAMP)
     private Date dateDerniereModification = new Date();
+	
+	@NotNull
+	private TypeService type;
 }
