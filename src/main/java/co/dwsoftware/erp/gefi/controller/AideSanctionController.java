@@ -1,7 +1,9 @@
 package co.dwsoftware.erp.gefi.controller;
 
+import co.dwsoftware.erp.gefi.model.Cotisation;
 import co.dwsoftware.erp.gefi.model.Service;
 import co.dwsoftware.erp.gefi.service.AideSanctionService;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.transaction.annotation.Transactional;
@@ -13,7 +15,7 @@ import java.util.List;
  * Created by lyonnel on 02/09/16.
  */
 @Controller
-public class AideController {
+public class AideSanctionController {
 
     @Autowired
     AideSanctionService aideSanctionService;
@@ -45,5 +47,19 @@ public class AideController {
     @Transactional
     public void deleteAide(@PathVariable long aideId) {
         aideSanctionService.delete(aideId);
+    }
+    
+    @RequestMapping(value = "/service/aide", method = RequestMethod.GET)
+    @ResponseBody
+    @Transactional
+    public List<Service> findAllByTontine() {
+        return aideSanctionService.findByAide();
+    }
+
+    @RequestMapping(value = "/service/sanction", method = RequestMethod.GET)
+    @ResponseBody
+    @Transactional
+    public List<Service> findAllByEpargne() {
+        return aideSanctionService.findBySanction();
     }
 }

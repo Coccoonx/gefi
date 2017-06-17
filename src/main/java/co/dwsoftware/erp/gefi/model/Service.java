@@ -25,14 +25,13 @@ public class Service {
     
     @CreatedDate
     @NotNull
-    @Temporal(TemporalType.TIMESTAMP)
-    private Date dateCreation = new Date();
+    private long dateCreation = new Date().getTime();
 	
 	@LastModifiedDate
     @NotNull
-    @Temporal(TemporalType.TIMESTAMP)
-    private Date dateDerniereModification = new Date();
+    private long dateDerniereModification = new Date().getTime();
 	
-	@NotNull
+	@Enumerated(EnumType.ORDINAL)
+	@Column(nullable = false)
 	private TypeService type;
 }

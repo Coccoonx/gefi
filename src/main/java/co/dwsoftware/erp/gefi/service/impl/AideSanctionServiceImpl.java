@@ -6,6 +6,8 @@ import co.dwsoftware.erp.gefi.model.TypeService;
 import co.dwsoftware.erp.gefi.repository.ServiceRepository;
 import co.dwsoftware.erp.gefi.service.AideSanctionService;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -19,12 +21,14 @@ import java.util.List;
  */
 @Component
 public class AideSanctionServiceImpl implements AideSanctionService {
-
+	private Logger logger = LoggerFactory.getLogger(this.getClass());
+	
     @Autowired
     ServiceRepository serviceRepository;
 
     @Override
     public Service create(Service service) {
+    	logger.info("Incoming Service{}", service );
         return serviceRepository.save(service);
     }
 
@@ -71,4 +75,14 @@ public class AideSanctionServiceImpl implements AideSanctionService {
 
         
     }
+
+	@Override
+	public List<Service> findByAide() {
+		return serviceRepository.findByAide();
+	}
+
+	@Override
+	public List<Service> findBySanction() {
+		return serviceRepository.findBySanction();
+	}
 }

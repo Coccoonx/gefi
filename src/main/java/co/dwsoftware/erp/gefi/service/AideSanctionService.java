@@ -12,6 +12,8 @@ public interface AideSanctionService {
     Service create(Service service);
     Service update(Service service);
     Service findByMotif(String motif);
+    List<Service> findByAide();
+    List<Service> findBySanction();
     List<Service> findAll();
     void delete(Long Id);
 
