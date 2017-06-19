@@ -61,7 +61,7 @@ public class AideSanctionServiceImpl implements AideSanctionService {
         serviceRepository.delete(id);
     }
 
-    @PostConstruct
+   // @PostConstruct
     private void populateAnnee(){
         Service service = new Service();
         service.setMotif("Decès");

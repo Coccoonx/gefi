@@ -54,6 +54,8 @@ public class Operation {
     @ManyToOne
     @NotNull
     private Service service;
+    
+    private long idOperationInitiale;
 
 
 

@@ -52,14 +52,16 @@ public class AideSanctionController {
     @RequestMapping(value = "/service/aide", method = RequestMethod.GET)
     @ResponseBody
     @Transactional
-    public List<Service> findAllByTontine() {
+    public List<Service> findAllByAide() {
         return aideSanctionService.findByAide();
     }
+    
+    
 
     @RequestMapping(value = "/service/sanction", method = RequestMethod.GET)
     @ResponseBody
     @Transactional
-    public List<Service> findAllByEpargne() {
+    public List<Service> findAllBySanction() {
         return aideSanctionService.findBySanction();
     }
 }

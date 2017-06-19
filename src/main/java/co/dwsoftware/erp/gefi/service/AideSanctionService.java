@@ -16,5 +16,6 @@ public interface AideSanctionService {
     List<Service> findBySanction();
     List<Service> findAll();
     void delete(Long Id);
+    
 
 }

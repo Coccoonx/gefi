@@ -52,7 +52,7 @@ public class AnneeServiceImpl implements AnneeService {
         anneeRepository.delete(id);
     }
 
-    @PostConstruct
+   // @PostConstruct
     private void populateAnnee(){
         Annee annee = new Annee();
         annee.setNom("2015");
