@@ -72,6 +72,23 @@ public class OperationController {
 		return operationService.findMembreRembourseurAide(cotisationId,
 				operationId);
 	}
+	
+	@RequestMapping(value = "/operation/sanction/{cotisationId}", method = RequestMethod.GET)
+	@ResponseBody
+	@Transactional
+	public List<Operation> findAllSanctionByCotisation(
+			@PathVariable("cotisationId") long cotisationId) {
+		return operationService.findOpsSanctionByCotisation(cotisationId);
+	}
+	
+
+	@RequestMapping(value = "/operation/sanctionner/{cotisationId}", method = RequestMethod.GET)
+	@ResponseBody
+	@Transactional
+	public List<Operation> findAllSanctionnerByCotisation(
+			@PathVariable("cotisationId") long cotisationId) {
+		return operationService.findMembreRembourseurSanction(cotisationId);
+	}
 
 	@RequestMapping(value = "/operation/{operationId}", method = RequestMethod.DELETE)
 	@ResponseBody

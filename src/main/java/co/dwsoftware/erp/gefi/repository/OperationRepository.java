@@ -19,6 +19,9 @@ public interface OperationRepository extends CrudRepository<Operation, Long> {
 	@Query("SELECT o FROM Operation o where o.type = 1 AND o.idOperationInitiale = :idOperationParent ")
     List<Operation> findAllRembourseurAide(@Param("idOperationParent") long idOperationParent);
 	
+	@Query("SELECT o FROM Operation o where o.type = 3")
+    List<Operation> findAllRembourseurSanction();
+	
 	@Query("SELECT o FROM Operation o where o.type = 2")
     List<Operation> findAllSanction();
 	

@@ -17,5 +17,7 @@ public interface OperationService {
 	List<Operation> findOpsAideByCotisation(long cotisationId);
 	List<InscriptionAnnuelle> findMembreForRemboursementAide(long cotisationId, long operationId);
 	List<Operation> findMembreRembourseurAide(long cotisationId, long operationId);
-
+	
+	List<Operation> findOpsSanctionByCotisation(long cotisationId);
+	List<Operation> findMembreRembourseurSanction(long cotisationId);
 }

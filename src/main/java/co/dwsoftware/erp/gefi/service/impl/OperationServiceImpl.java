@@ -112,6 +112,70 @@ public class OperationServiceImpl implements OperationService {
 		}
 		return tuple;
 	}
+	
+	@Override
+	public List<Operation> findOpsSanctionByCotisation(long cotisationId) {
+		String date_pattern = "yyyy-MM-dd";
+		Cotisation cotisation = cotisationRepository.findOne(cotisationId);
+		List<Operation> tuple = new ArrayList<Operation>();
+
+		if (cotisation != null) {
+			SimpleDateFormat df = new SimpleDateFormat(date_pattern);
+
+			try {
+				Date bInf = df.parse(cotisation.getDateDebut());
+				Date bSup = df.parse(cotisation.getDateFin());
+
+				List<Operation> operations = operationRepository.findAllSanction();
+				for (Operation operation : operations) {
+					if (bInf.before(new Date(operation.getDateOperation()))
+							&& bSup.after(new Date(operation.getDateOperation()))) {
+						tuple.add(operation);
+					}
+				}
+
+			} catch (ParseException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+				return null;
+			}
+
+		}
+		return tuple;
+	}
+	
+	@Override
+	public List<Operation> findMembreRembourseurSanction(long cotisationId) {
+		String date_pattern = "yyyy-MM-dd";
+		Cotisation cotisation = cotisationRepository.findOne(cotisationId);
+		List<Operation> tuple = new ArrayList<Operation>();
+
+		if (cotisation != null) {
+			SimpleDateFormat df = new SimpleDateFormat(date_pattern);
+
+			try {
+				Date bInf = df.parse(cotisation.getDateDebut());
+				Date bSup = df.parse(cotisation.getDateFin());
+
+				List<Operation> operations = operationRepository.findAllRembourseurSanction();
+				for (Operation operation : operations) {
+					if (bInf.before(new Date(operation.getDateOperation()))
+							&& bSup.after(new Date(operation.getDateOperation()))) {
+						Operation operationIni = operationRepository.findOne(operation.getIdOperationInitiale());
+						operation.setMontantAttendu(operationIni.getMontantOperation());
+						tuple.add(operation);
+					}
+				}
+
+			} catch (ParseException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+				return null;
+			}
+
+		}
+		return tuple;
+	}
 
 	@Override
 	public List<InscriptionAnnuelle> findMembreForRemboursementAide(
