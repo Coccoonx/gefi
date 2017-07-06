@@ -29,16 +29,21 @@ public class AideSanctionServiceImpl implements AideSanctionService {
     @Override
     public Service create(Service service) {
     	logger.info("Incoming Service{}", service );
+    	 Service exist = serviceRepository.findByMotif(service.getMotif());
+         if (exist != null) {
+             throw new IllegalArgumentException("service.already.exist");
+         }
         return serviceRepository.save(service);
     }
 
     @Override
     public Service update(Service service) {
-        Service exist = serviceRepository.findByMotif(service.getMotif());
+    	logger.info("Incoming Service{}", service );
+        Service exist = serviceRepository.findOne(service.getId());
         if (exist == null) {
-            throw new IllegalArgumentException("");
+            throw new IllegalArgumentException("service.does.not.exist");
         }
-        return serviceRepository.save(exist);
+        return serviceRepository.save(service);
     }
 
     @Override
@@ -55,7 +60,7 @@ public class AideSanctionServiceImpl implements AideSanctionService {
     public void delete(Long id) {
         Service exist = serviceRepository.findOne(id);
         if (exist == null) {
-            throw  new IllegalArgumentException("");
+            throw  new IllegalArgumentException("service.does.not.exist");
 
         }
         serviceRepository.delete(id);
