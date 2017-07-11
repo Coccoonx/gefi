@@ -78,9 +78,6 @@ public class Transaction {
 	private Cotisation cotisation;
 
 	public Transaction() {
-		dateCreation = new Date().getTime();
-
-		dateDerniereModification = new Date().getTime();
 	}
 
 }
