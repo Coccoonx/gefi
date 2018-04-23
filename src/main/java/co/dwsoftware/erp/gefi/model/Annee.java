@@ -24,6 +24,8 @@ public class Annee {
     private String dateDebut;
 
     private String dateFin;
+
+    private int nombreSeance;
     
     @CreatedDate
     @NotNull

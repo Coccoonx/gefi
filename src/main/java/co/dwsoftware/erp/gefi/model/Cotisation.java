@@ -37,6 +37,8 @@ public class Cotisation {
     @Enumerated(EnumType.ORDINAL)
     @Column(nullable = false)
     private TypeCotisation typeCotisation;
+
+    private Integer nombreSeance;
     
     private double montant;
 
