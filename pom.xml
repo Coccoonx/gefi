@@ -41,9 +41,9 @@
             </activation>
             <properties>
                 <spring.datasource.driverClassName>org.postgresql.Driver</spring.datasource.driverClassName>
-                <spring.datasource.url>jdbc:postgresql://localhost:5432/gefidb</spring.datasource.url>
+                <spring.datasource.url>jdbc:postgresql://localhost:7874/gefidb</spring.datasource.url>
                 <spring.datasource.username>postgres</spring.datasource.username>
-                <spring.datasource.password>root</spring.datasource.password>
+                <spring.datasource.password>postgres74</spring.datasource.password>
                 <spring.jpa.database>POSTGRESQL</spring.jpa.database>
                 <spring.datasource.platform>postgres</spring.datasource.platform>
                 <spring.jpa.show-sql>true</spring.jpa.show-sql>
