@@ -1,12 +1,12 @@
 package co.dwsoftware.erp.gefi.service.impl;
 
 import co.dwsoftware.erp.gefi.model.Membre;
+import co.dwsoftware.erp.gefi.model.Statut;
 import co.dwsoftware.erp.gefi.repository.MembreRepository;
 import co.dwsoftware.erp.gefi.service.MembreService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-import javax.annotation.PostConstruct;
 import java.util.List;
 
 /**
@@ -58,16 +58,21 @@ public class MembreServiceImpl implements MembreService {
 
     @Override
     public List<Membre> findAll() {
-        return (List<Membre>) membreRepository.findAll();
+        return membreRepository.findActiveMember();
     }
 
     @Override
     public void delete(Long id) {
-        membreRepository.delete(id);
+
+        Membre m = membreRepository.findOne(id);
+        if (m != null) {
+            m.setStatut(Statut.Supprime);
+            membreRepository.save(m);
+        }
     }
 
     //@PostConstruct
-    public void populate(){
+    public void populate() {
         Membre membre = new Membre();
         membre.setNom("Kamga");
         membre.setPrenom("Maurice");
